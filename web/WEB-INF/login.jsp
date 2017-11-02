@@ -1,17 +1,15 @@
-<%-- 
-    Document   : login
-    Created on : Nov 2, 2017, 3:26:57 PM
-    Author     : 608964
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
+<%@taglib tagdir="/WEB-INF/tags" prefix="c" %>
+<%@ taglib uri="/WEB-INF/tlds/header" prefix="sait" %>
+
+<c:header></c:header>
+    
+        <h1>Users Login</h1>
+        <form action="home?action=login" method="post">
+            <p>Username: <input type="text" name="username" value="${user.username}"/></p>
+            <p>Password: <input type="text" name="password" /></p>
+            <p><input type="submit" value="Login"></p>
+        </form>  
+        ${message}
     </body>
 </html>

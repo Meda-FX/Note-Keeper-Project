@@ -4,7 +4,7 @@
 
 <c:headerLogout></c:headerLogout>
 
-        <h1>User Account</h1>
-        <h2>User can edit their information. Can delete their account.</h2>
+        <h1>Mange Users</h1>
+        <h3>Admins: can add, edit, physically delete and view all user.</h3>
     </body>
 </html>
