@@ -1,8 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib tagdir="/WEB-INF/tags" prefix="c" %>
-<%@ taglib uri="/WEB-INF/tlds/header" prefix="sait" %>
 
-<c:header></c:header>
+<%--<c:header></c:header>--%>
     
         <h1>Users Login</h1>
         <form action="home?action=login" method="post">

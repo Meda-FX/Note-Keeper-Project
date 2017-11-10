@@ -1,6 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib tagdir="/WEB-INF/tags" prefix="c" %>
-<%@ taglib uri="/WEB-INF/tlds/header" prefix="sait" %>
 
 <c:headerLogout></c:headerLogout>
 

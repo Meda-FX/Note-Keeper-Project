@@ -1,0 +1,69 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib tagdir="/WEB-INF/tags" prefix="c" %>
+<%@taglib prefix="d" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:headerLogout></c:headerLogout>
+
+        <h1>Notes Manager</h1>
+        <h3>Notes</h3>
+        <p>${message}</p>
+
+        <d:if test="${selectedNote != null}">
+            <h3>Edit Note</h3>
+            <form action="notes" method="POST">
+                Note ID: <input type="text" name="noteid" value="${selectedNote.noteId}" readonly><br>
+                Title: <input type="text" name="title" value="${selectedNote.title}" readonly><br>                
+                Date Created: <input type="text" name="datecreated" value="${selectedNote.dateCreated}" readonly><br>
+                Contents: <input type="text" name="contents" value="${selectedNote.contents}"><br>
+                <input type="hidden" name="action" value="edit">
+                <input type="submit" value="Save">
+            </form>
+        </d:if>
+        
+        <d:if test="${selectedNote == null}">
+            <h3>Add Note</h3>
+            <form action="notes" method="POST">
+                Note Id <input type="text" name="noteid" readonly><br>
+                Note Title: <input type="text" name="title" readonly><br>
+                Date Created: <input type="text" name="dateCreated" readonly><br>
+                Contents: <input type="text" name="contents"><br>
+                <input type="hidden" name="action" value="add">
+                <input type="submit" value="Save">
+            </form>
+        </d:if>
+        
+            
+        <table>
+            <tr>
+                <th>Note Id</th>
+                <th>Note Title</th>
+                <th>Date Created</th>
+                <th>Contents</th>
+            </tr>
+            <d:forEach var="note" items="${notes}">
+                <tr>
+                    <td>${note.noteId}</td>
+                    <td>${note.title}</td>
+                    <td>${note.dateCreated}</td>
+                    <td>${note.contents}</td>
+                    <td>
+                        <form action="notes" method="post" >
+                            <input type="submit" value="Delete">
+                            <input type="hidden" name="action" value="delete">
+                            <input type="hidden" name="selectedId" value="${note.noteId}">
+                        </form>
+                    </td>
+                    <!--This is to update the fields-->
+                    <td>
+                        <form action="notes" method="get">
+                            <input type="submit" value="Edit">
+                            <input type="hidden" name="action" value="view">
+                            <input type="hidden" name="selectedId" value="${note.noteId}">
+                        </form>
+                    </td>
+                </tr>
+            </d:forEach>
+        </table>
+            
+    </body>
+</html>
