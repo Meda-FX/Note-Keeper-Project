@@ -6,6 +6,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 
 public class UserDB {
     
@@ -96,6 +98,27 @@ public class UserDB {
         }
     }
     
+    public static User checkUser(String username, String password) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        String qString = "SELECT u FROM User u " +
+                         "WHERE u.username = :username " + 
+                         "and u.password = :password";
+        TypedQuery<User> q = em.createQuery(qString, User.class);
+        q.setParameter("username", username);
+        q.setParameter("password", password);
+
+        User user = null;
+        try {
+            user = q.getSingleResult();
+        } catch (NoResultException e) {
+            System.out.println(e);
+        } finally {
+            em.close();
+        }
+        return user;
+    }
+
+
 //    public int logicallyDelete(User user) throws UserDBException
 //    {
 //        EntityManager em = DBUtil.getEmFactory().createEntityManager();
