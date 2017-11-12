@@ -1,7 +1,9 @@
 package servlets;
 
 import businesslogic.NoteService;
+import businesslogic.UserService;
 import domainmodel.Note;
+import domainmodel.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -11,23 +13,26 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class NotesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         NoteService ns = new NoteService();
         String action = request.getParameter("action");
 
         if (action != null && action.equals("view")) {
-            String selectdId = request.getParameter("action");
+            String selectedId = request.getParameter("selectedId");
 
-            try {
-                Note note = ns.get(Integer.parseInt(selectdId));
+            try 
+            {
+                Note note = ns.get(Integer.parseInt(selectedId));
                 request.setAttribute("selectedNote", note);
-            } catch (Exception ex) {
+            } 
+            catch (Exception ex) {
                 Logger.getLogger(NotesServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -48,13 +53,13 @@ public class NotesServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String action = request.getParameter("action");
-
+        
         if(action == null)
         {
             action = "";
         }
+        
         NoteService ns = new NoteService();
-
         try {
             if (action.equals("delete")) {
                 int selectedId = Integer.parseInt(request.getParameter("selectedId"));
@@ -64,22 +69,28 @@ public class NotesServlet extends HttpServlet {
             {
                 int noteId = Integer.parseInt(request.getParameter("noteid"));
                 String contents = request.getParameter("contents");
-                ns.update(noteId, contents);
+                String title = request.getParameter("title");
+                ns.update(noteId, contents, title);
             }
             else if (action.equals("add"))
             {
                 String contents = request.getParameter("contents");
                 String title = request.getParameter("title");
-                ns.insert(title, contents);
+                User user;
+                HttpSession session = request.getSession();
+                user = (User) session.getAttribute("username");
+                ns.insert(title, contents, user);
             }
         } catch (Exception ex) {
-            Logger.getLogger(NotesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("message", "Could not perform that action. Please try again.");
         }
         
         List<Note> notes = null;
-        try {
-            notes = ns.getAll();
-        } catch (Exception ex) {
+        try 
+        {
+            notes = (List<Note>) ns.getAll();
+        } 
+        catch (Exception ex) {
             Logger.getLogger(NotesServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         

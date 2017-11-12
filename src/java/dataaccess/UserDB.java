@@ -11,7 +11,7 @@ import javax.persistence.TypedQuery;
 
 public class UserDB {
     
-    public int insert(User user) throws UserDBException {
+    public int insert(User user) throws NotesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         
@@ -23,13 +23,13 @@ public class UserDB {
         }catch (Exception ex) {
             trans.rollback();
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot insert " + user.toString(), ex);
-            throw new UserDBException("Error inserting user");
+            throw new NotesDBException("Error inserting user");
         } finally {
             em.close();
         }
     }
     
-    public int update(User user) throws UserDBException {
+    public int update(User user) throws NotesDBException {
               
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -42,13 +42,13 @@ public class UserDB {
         } catch (Exception ex) {
             trans.rollback();
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot update " + user.toString(), ex);
-            throw new UserDBException("Error updating user");
+            throw new NotesDBException("Error updating user");
         } finally {
             em.close();
         }        
     }
     
-    public List<User> getAll() throws UserDBException {
+    public List<User> getAll() throws NotesDBException {
         
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -57,13 +57,13 @@ public class UserDB {
             return users;
         } catch (Exception ex) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot read user", ex);
-            throw new UserDBException("Error getting users");
+            throw new NotesDBException("Error getting users");
         } finally {
             em.close();
         }
     }
     
-    public User getUser(String username) throws UserDBException {
+    public User getUser(String username) throws NotesDBException {
         
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -73,13 +73,13 @@ public class UserDB {
             return user;
         } catch (Exception ex) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot read users", ex);
-            throw new UserDBException("Error getting user");
+            throw new NotesDBException("Error getting user");
         } finally {
             em.close();
         }
     }
     
-    public int delete(User user) throws UserDBException {
+    public int delete(User user) throws NotesDBException {
         
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -92,12 +92,13 @@ public class UserDB {
         } catch (Exception ex) {
             trans.rollback();
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot delete " + user.toString(), ex);
-            throw new UserDBException("Error deleting user");
+            throw new NotesDBException("Error deleting user");
         } finally {
             em.close();
         }
     }
     
+    /*
     public static User checkUser(String username, String password) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         String qString = "SELECT u FROM User u " +
@@ -117,6 +118,7 @@ public class UserDB {
         }
         return user;
     }
+*/
 
 
 //    public int logicallyDelete(User user) throws UserDBException
@@ -127,4 +129,5 @@ public class UserDB {
 //        trans.begin();
 //        
 //    }
+    
 }

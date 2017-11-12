@@ -16,7 +16,7 @@ import javax.persistence.EntityTransaction;
 public class NoteDB {
 
     public int insert(Note note) throws NotesDBException {
-        EntityManager em =DBUtil.getEmFactory().createEntityManager();
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         
         try {

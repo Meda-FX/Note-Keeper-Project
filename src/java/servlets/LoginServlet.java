@@ -13,12 +13,34 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       
+        String action = request.getParameter("action");
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("username");
+        
+        if(action == null)
+            action = "";
+        
+        // for session check
+//        if(username == null)
+//        {
+//            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+//        }
+        
+         
+        if(action.equals("logout"))
+        {
+            request.setAttribute("message", "You've been logged out successfully.");
+            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+        }
+                
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
     }
 
@@ -30,8 +52,8 @@ public class LoginServlet extends HttpServlet {
         String action = request.getParameter("action");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        HttpSession session = request.getSession();
         
-        //User user = new User(username);
         User user = null;
         Role role = null;
         UserService us = new UserService();
@@ -60,7 +82,6 @@ public class LoginServlet extends HttpServlet {
                 
                 if(user == null) //case 1 username exist
                 {
-                    //System.out.print("User name does  not exist.");
                     request.setAttribute("message", "User name does not exist.");
                     getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                     return;
@@ -69,27 +90,27 @@ public class LoginServlet extends HttpServlet {
                 //case 2 username does not exists                
                 if(user.getPassword().equals(password))
                 {
-                    //request.setAttribute("message", "The password is good.");
-                    
+                    //request.setAttribute("message", "The password is good.");                    
                     // check if they are admin or regular user
                     if(user.getActive() == true)
                     {
                         role = rs.get(1);
-                        //request.setAttribute("message", "The user is active.");
-                        //getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                         if(user.getRole().getRoleID() == 1)
                         {
-                            request.setAttribute("message", "The user is active and is an Aminstrator.");
-                            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-                            return;
+                            //request.setAttribute("message", "The user is active and is an Aminstrator.");
+                            session.setAttribute("username", username);
+                            response.sendRedirect("admin");
+                            //getServletContext().getRequestDispatcher("/WEB-INF/admin/users.jsp").forward(request, response);
+                            //return;
                         }
                         else
                         {
-                            request.setAttribute("message", "The user is active and is a Regular user.");
-                            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-                            return;
-                        }
-                                             
+                            //request.setAttribute("message", "The user is active and is a Regular user.");
+                            session.setAttribute("username", username);
+                            response.sendRedirect("notes");
+                            //getServletContext().getRequestDispatcher("/WEB-INF/notes/notes.jsp").forward(request, response);
+                            //return;
+                        }                                             
                     }
                     else
                     {
@@ -97,10 +118,7 @@ public class LoginServlet extends HttpServlet {
                         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                         return;
                     }
-                    // check if they are active or not
-                    
-                    
-                    
+                    // check if they are active or not                    
                    // getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                    // return;
                 }

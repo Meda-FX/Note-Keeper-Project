@@ -11,9 +11,9 @@
         <d:if test="${selectedNote != null}">
             <h3>Edit Note</h3>
             <form action="notes" method="POST">
-                Note ID: <input type="text" name="noteid" value="${selectedNote.noteId}" readonly><br>
+                Note ID: <input type="text" name="noteid" value="${selectedNote.noteID}" readonly><br>
                 Title: <input type="text" name="title" value="${selectedNote.title}" readonly><br>                
-                Date Created: <input type="text" name="datecreated" value="${selectedNote.dateCreated}" readonly><br>
+                Date Created: <input type="text" name="dateCreated" value="${selectedNote.dateCreated}" readonly><br>
                 Contents: <input type="text" name="contents" value="${selectedNote.contents}"><br>
                 <input type="hidden" name="action" value="edit">
                 <input type="submit" value="Save">
@@ -23,8 +23,8 @@
         <d:if test="${selectedNote == null}">
             <h3>Add Note</h3>
             <form action="notes" method="POST">
-                Note Id <input type="text" name="noteid" readonly><br>
-                Note Title: <input type="text" name="title" readonly><br>
+                Note Id: <input type="text" name="noteid" readonly><br>
+                Note Title: <input type="text" name="title"><br>
                 Date Created: <input type="text" name="dateCreated" readonly><br>
                 Contents: <input type="text" name="contents"><br>
                 <input type="hidden" name="action" value="add">
@@ -42,7 +42,7 @@
             </tr>
             <d:forEach var="note" items="${notes}">
                 <tr>
-                    <td>${note.noteId}</td>
+                    <td>${note.noteID}</td>
                     <td>${note.title}</td>
                     <td>${note.dateCreated}</td>
                     <td>${note.contents}</td>
@@ -50,7 +50,7 @@
                         <form action="notes" method="post" >
                             <input type="submit" value="Delete">
                             <input type="hidden" name="action" value="delete">
-                            <input type="hidden" name="selectedId" value="${note.noteId}">
+                            <input type="hidden" name="selectedId" value="${note.noteID}">
                         </form>
                     </td>
                     <!--This is to update the fields-->
@@ -58,7 +58,7 @@
                         <form action="notes" method="get">
                             <input type="submit" value="Edit">
                             <input type="hidden" name="action" value="view">
-                            <input type="hidden" name="selectedId" value="${note.noteId}">
+                            <input type="hidden" name="selectedId" value="${note.noteID}">
                         </form>
                     </td>
                 </tr>

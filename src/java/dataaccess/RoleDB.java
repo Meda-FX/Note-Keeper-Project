@@ -9,7 +9,7 @@ import javax.persistence.EntityTransaction;
 
 public class RoleDB {
     
-    public int insert(Role role) throws UserDBException {
+    public int insert(Role role) throws NotesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         
@@ -21,13 +21,13 @@ public class RoleDB {
         }catch (Exception ex) {
             trans.rollback();
             Logger.getLogger(RoleDB.class.getName()).log(Level.SEVERE, "Cannot insert " + role.toString(), ex);
-            throw new UserDBException("Error inserting role");
+            throw new NotesDBException("Error inserting role");
         } finally {
             em.close();
         }
     }
     
-    public int update(Role role) throws UserDBException {
+    public int update(Role role) throws NotesDBException {
               
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -40,13 +40,13 @@ public class RoleDB {
         } catch (Exception ex) {
             trans.rollback();
             Logger.getLogger(RoleDB.class.getName()).log(Level.SEVERE, "Cannot update " + role.toString(), ex);
-            throw new UserDBException("Error updating role");
+            throw new NotesDBException("Error updating role");
         } finally {
             em.close();
         }        
     }
     
-    public List<Role> getAll() throws UserDBException {
+    public List<Role> getAll() throws NotesDBException {
         
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -55,13 +55,13 @@ public class RoleDB {
             return roles;
         } catch (Exception ex) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot read role", ex);
-            throw new UserDBException("Error getting roles");
+            throw new NotesDBException("Error getting roles");
         } finally {
             em.close();
         }
     }
     
-     public Role getRole(int roleId) throws UserDBException {
+     public Role getRole(int roleId) throws NotesDBException {
         
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -71,13 +71,13 @@ public class RoleDB {
             return role;
         } catch (Exception ex) {
             Logger.getLogger(RoleDB.class.getName()).log(Level.SEVERE, "Cannot read role", ex);
-            throw new UserDBException("Error getting role");
+            throw new NotesDBException("Error getting role");
         } finally {
             em.close();
         }
     }
      
-    public int delete(Role role) throws UserDBException {
+    public int delete(Role role) throws NotesDBException {
         
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -90,7 +90,7 @@ public class RoleDB {
         } catch (Exception ex) {
             trans.rollback();
             Logger.getLogger(RoleDB.class.getName()).log(Level.SEVERE, "Cannot delete " + role.toString(), ex);
-            throw new UserDBException("Error deleting role");
+            throw new NotesDBException("Error deleting role");
         } finally {
             em.close();
         }
