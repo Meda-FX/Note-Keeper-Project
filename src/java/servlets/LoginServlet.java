@@ -78,8 +78,7 @@ public class LoginServlet extends HttpServlet {
             }
             
             try {    
-                user = us.get(username);
-                
+                user = us.get(username);                
                 if(user == null) //case 1 username exist
                 {
                     request.setAttribute("message", "User name does not exist.");

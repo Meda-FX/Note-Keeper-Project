@@ -2,6 +2,7 @@
 package businesslogic;
 
 import dataaccess.UserDB;
+import domainmodel.Role;
 import domainmodel.User;
 import java.util.List;
 
@@ -40,15 +41,19 @@ public class UserService {
     }
     
     //Read on how it works
-    public void logicallyDelete(String username, boolean active) throws Exception {        
+    public int logicallyDelete(String username, boolean active) throws Exception {        
         //Have to set the acttive with false to logically delete
         User user = userDB.getUser(username);
         user.setActive(false);
+        return userDB.update(user);
         //return userDB.delete(deleteUser);
     }
     
     public int insert(String username, String password, String email, boolean active, String firstname, String lastname) throws Exception {
-        User user = new User(username, password, email, active, firstname, lastname);
+        Role role = new Role();
+        RoleService rs = new RoleService();
+        role = rs.get(2);
+        User user = new User(username, password, email, active, firstname, lastname, role);
         return  userDB.insert(user);
     }
 }

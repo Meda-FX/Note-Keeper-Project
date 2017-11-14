@@ -46,7 +46,7 @@ public class Note implements Serializable {
     private Integer noteID;
     @Basic(optional = false)
     @Column(name = "DateCreated")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dateCreated;
     @Basic(optional = false)
     @Column(name = "Title")

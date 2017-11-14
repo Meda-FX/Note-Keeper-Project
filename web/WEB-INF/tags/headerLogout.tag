@@ -10,4 +10,4 @@
         <link rel="stylesheet" href="<d:url value='styles/note.css' />" />
     </head>
     <body>
-        <a href="admin">Admin</a> | <a href="notes">Notes</a> | <a href="#">Account</a> | <a href="login?action=logout">Logout</a>
+        <a href="admin">Admin</a> | <a href="notes">Notes</a> | <a href="account">Account</a> | <a href="login?action=logout">Logout</a>

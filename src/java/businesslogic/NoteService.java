@@ -37,9 +37,10 @@ public class NoteService {
     //user will edit the title and the content or only the content
     public int insert(String title, String contents, User owner) throws Exception {
         java.util.Date uDate = new java.util.Date();
-        java.sql.Date date = new java.sql.Date(uDate.getTime());
         //Date date = new Date();
-        Note note = new Note(0, date, title, contents, owner);
+        java.sql.Date sDate = new java.sql.Date(uDate.getTime());
+        
+        Note note = new Note(0, sDate, title, contents, owner);
         return noteDB.insert(note);
     }
 }

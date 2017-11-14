@@ -53,17 +53,39 @@ public class NotesServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String action = request.getParameter("action");
-        
+        Note note = null;        
+        String accountHolder;
+        HttpSession session = request.getSession();
+        accountHolder = (String) session.getAttribute("username");
+         
         if(action == null)
         {
             action = "";
         }
         
         NoteService ns = new NoteService();
-        try {
-            if (action.equals("delete")) {
+        try {            
+            //note = ns.get(selectedId);
+            if (action.equals("delete")) {   
+                
                 int selectedId = Integer.parseInt(request.getParameter("selectedId"));
                 ns.delete(selectedId);
+             /*
+                if(note.getOwner().equals(accountHolder))
+               {
+                    request.setAttribute("message", "Not your Note");
+                    getServletContext().getRequestDispatcher("/WEB-INF/notes/notes.jsp").forward(request, response);
+                   return;
+                     //selectedId = Integer.parseInt(request.getParameter("selectedId"));
+                    //ns.delete(selectedId);
+               }
+               else
+               {
+                   request.setAttribute("message", "It is your note.");
+                   getServletContext().getRequestDispatcher("/WEB-INF/notes/notes.jsp").forward(request, response);
+                   return;
+               }
+            */
             }
             else if(action.equals("edit"))
             {
@@ -77,7 +99,7 @@ public class NotesServlet extends HttpServlet {
                 String contents = request.getParameter("contents");
                 String title = request.getParameter("title");
                 User user;
-                HttpSession session = request.getSession();
+                //session = request.getSession();
                 user = (User) session.getAttribute("username");
                 ns.insert(title, contents, user);
             }

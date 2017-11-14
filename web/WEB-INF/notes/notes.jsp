@@ -12,7 +12,7 @@
             <h3>Edit Note</h3>
             <form action="notes" method="POST">
                 Note ID: <input type="text" name="noteid" value="${selectedNote.noteID}" readonly><br>
-                Title: <input type="text" name="title" value="${selectedNote.title}" readonly><br>                
+                Title: <input type="text" name="title" value="${selectedNote.title}" ><br>                
                 Date Created: <input type="text" name="dateCreated" value="${selectedNote.dateCreated}" readonly><br>
                 Contents: <input type="text" name="contents" value="${selectedNote.contents}"><br>
                 <input type="hidden" name="action" value="edit">
@@ -40,6 +40,7 @@
                 <th>Date Created</th>
                 <th>Contents</th>
             </tr>
+            
             <d:forEach var="note" items="${notes}">
                 <tr>
                     <td>${note.noteID}</td>
