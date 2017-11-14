@@ -1,6 +1,8 @@
 package servlets;
 
+import businesslogic.RoleService;
 import businesslogic.UserService;
+import domainmodel.Role;
 import domainmodel.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -66,7 +68,7 @@ public class AdminServlet extends HttpServlet {
         HttpSession session = request.getSession();
         User user; //(User) session.getAttribute("username");
         String accountHolder = (String)session.getAttribute("username");     
-        String usernameNew = request.getParameter("username");
+        String selectedUser = request.getParameter("selectedUser");
         
         if(action == null) 
         {
@@ -74,26 +76,28 @@ public class AdminServlet extends HttpServlet {
         }
         
         UserService us = new UserService();
-        try {            
-            user = us.get(accountHolder);
+        try { 
             
             if(action.equals("delete"))
-            {                
-                if(user.getUsername().equals(usernameNew))
+            { 
+                user = us.get(selectedUser);
+                if(user.getUsername().equals(accountHolder))
                 {
-                    request.setAttribute("message", "Admin cannot delete himself.");
-                    //doGet(request, response);
-                    getServletContext().getRequestDispatcher("/WEB-INF/admin/users.jsp").forward(request, response);
-                    return;
-                }
-                
+                    request.setAttribute("message", "You cannot delete yourself.");
+                    doGet(request, response);
+                    //getServletContext().getRequestDispatcher("/WEB-INF/admin/users.jsp").forward(request, response);
+                    //return;
+                }                
                 else
                 {
-                    request.setAttribute("message", "You can be deleted.");
-                    getServletContext().getRequestDispatcher("/WEB-INF/admin/users.jsp").forward(request, response);
+                    request.setAttribute("message", "Deleted Successfuly.");
+                    //selectedUser = request.getParameter("selectedUser");              
+                    us.delete(selectedUser);
+                    doGet(request, response);
+                    //getServletContext().getRequestDispatcher("/WEB-INF/admin/users.jsp").forward(request, response);
                     //getServletContext().getRequestDispatcher("/WEB-INF/account/account.jsp").forward(request, response);
                     //doGet(request, response);
-                    return;
+                   // return;
                 }
                 
                 /*
