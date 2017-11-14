@@ -93,7 +93,7 @@ public class AccountServlet extends HttpServlet {
                 String firstname = request.getParameter("firstname");
                 String lastname = request.getParameter("lastname");
                 us.update(username, email, password, firstname, lastname);
-                
+                doGet(request, response);
             }
         } catch (Exception ex) {
             request.setAttribute("message", "Could not perform that action.");
@@ -107,8 +107,7 @@ public class AccountServlet extends HttpServlet {
             Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
         }        
         request.setAttribute("users", users);
-        */
-        
+        */        
         getServletContext().getRequestDispatcher("/WEB-INF/account/account.jsp").forward(request, response);
     }
 }

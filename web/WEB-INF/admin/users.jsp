@@ -5,7 +5,7 @@
 <c:headerLogout></c:headerLogout>
 
         <h1>Mange Users</h1>
-        
+        <p class="error">${message}</p>   
          <d:if test="${selectedUser != null}">
             <h3>Edit User</h3>
             <form action="admin" method="POST">

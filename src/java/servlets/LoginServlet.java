@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("message", "You've been logged out successfully.");
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         }
-                
+        
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
     }
 
@@ -60,7 +60,9 @@ public class LoginServlet extends HttpServlet {
         RoleService rs = new RoleService();
         
         if(action == null)
+        {
             action = "";
+        }
         
         if(action.equals("login"))
         {            
@@ -98,6 +100,7 @@ public class LoginServlet extends HttpServlet {
                         {
                             //request.setAttribute("message", "The user is active and is an Aminstrator.");
                             session.setAttribute("username", username);
+                            session.setAttribute("user", user);
                             response.sendRedirect("admin");
                             //getServletContext().getRequestDispatcher("/WEB-INF/admin/users.jsp").forward(request, response);
                             //return;
@@ -106,6 +109,7 @@ public class LoginServlet extends HttpServlet {
                         {
                             //request.setAttribute("message", "The user is active and is a Regular user.");
                             session.setAttribute("username", username);
+                            session.setAttribute("user", user);
                             response.sendRedirect("notes");
                             //getServletContext().getRequestDispatcher("/WEB-INF/notes/notes.jsp").forward(request, response);
                             //return;

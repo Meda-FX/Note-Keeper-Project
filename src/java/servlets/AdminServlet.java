@@ -19,7 +19,7 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-         UserService us = new UserService();
+        UserService us = new UserService();
         String action = request.getParameter("action");
         
         if(action != null && action.equals("view"))
@@ -33,12 +33,13 @@ public class AdminServlet extends HttpServlet {
             }
         }        
         
+         /*
         User user = null;        
-        String accountHolder;
+        //String accountHolder;
         HttpSession session = request.getSession();
-        accountHolder = (String) session.getAttribute("username");
+        String accountHolder = (String) session.getAttribute("username");
        
-        /*
+       
         try {
             user = us.get(accountHolder);
         } catch (Exception ex) {
@@ -53,7 +54,6 @@ public class AdminServlet extends HttpServlet {
             Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
         request.setAttribute("users", users);         
         getServletContext().getRequestDispatcher("/WEB-INF/admin/users.jsp").forward(request, response);
     }
@@ -65,7 +65,8 @@ public class AdminServlet extends HttpServlet {
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
         User user; //(User) session.getAttribute("username");
-        String accountHolder = (String)session.getAttribute("username");
+        String accountHolder = (String)session.getAttribute("username");     
+        String usernameNew = request.getParameter("username");
         
         if(action == null) 
         {
@@ -73,11 +74,33 @@ public class AdminServlet extends HttpServlet {
         }
         
         UserService us = new UserService();
-        try {
+        try {            
+            user = us.get(accountHolder);
+            
             if(action.equals("delete"))
-            {
+            {                
+                if(user.getUsername().equals(usernameNew))
+                {
+                    request.setAttribute("message", "Admin cannot delete himself.");
+                    //doGet(request, response);
+                    getServletContext().getRequestDispatcher("/WEB-INF/admin/users.jsp").forward(request, response);
+                    return;
+                }
+                
+                else
+                {
+                    request.setAttribute("message", "You can be deleted.");
+                    getServletContext().getRequestDispatcher("/WEB-INF/admin/users.jsp").forward(request, response);
+                    //getServletContext().getRequestDispatcher("/WEB-INF/account/account.jsp").forward(request, response);
+                    //doGet(request, response);
+                    return;
+                }
+                
+                /*
                 String selectedUser = request.getParameter("selectedUser");              
                 us.delete(selectedUser);
+                doGet(request, response);
+                */
             } 
             else if(action.equals("edit"))
             {
@@ -87,7 +110,8 @@ public class AdminServlet extends HttpServlet {
                 String firstname = request.getParameter("firstname");
                 String lastname = request.getParameter("lastname");
                 
-                us.update(username, email, password, firstname, lastname);   
+                us.update(username, email, password, firstname, lastname);  
+                doGet(request, response);
                 
             } else if(action.equals("add"))
             {
@@ -98,6 +122,7 @@ public class AdminServlet extends HttpServlet {
                 String lastname = request.getParameter("lastname");
                 
                 us.insert(username, password, email, true, firstname, lastname);
+                doGet(request, response);
             }
         } catch (Exception ex) {
             request.setAttribute("message", "Could not perform that action.");
@@ -111,7 +136,7 @@ public class AdminServlet extends HttpServlet {
             Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
         }        
         request.setAttribute("users", users);
-        getServletContext().getRequestDispatcher("/WEB-INF/account/account.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/admin/users.jsp").forward(request, response);
        
     }
 }

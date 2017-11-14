@@ -53,7 +53,7 @@ public class NotesServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String action = request.getParameter("action");
-        Note note = null;        
+               
         String accountHolder;
         HttpSession session = request.getSession();
         accountHolder = (String) session.getAttribute("username");
@@ -62,30 +62,27 @@ public class NotesServlet extends HttpServlet {
         {
             action = "";
         }
-        
-        NoteService ns = new NoteService();
-        try {            
+        Note note = null; 
+        NoteService ns = new NoteService();        
+        try {     
+            //int selectedId = Integer.parseInt(request.getParameter("selectedId"));
             //note = ns.get(selectedId);
-            if (action.equals("delete")) {   
-                
-                int selectedId = Integer.parseInt(request.getParameter("selectedId"));
-                ns.delete(selectedId);
-             /*
-                if(note.getOwner().equals(accountHolder))
-               {
-                    request.setAttribute("message", "Not your Note");
-                    getServletContext().getRequestDispatcher("/WEB-INF/notes/notes.jsp").forward(request, response);
+            if (action.equals("delete")) 
+            {    
+               int selectedId = Integer.parseInt(request.getParameter("selectedId"));
+               note = ns.get(selectedId);
+               if(!note.getOwner().getUsername().equals(accountHolder))
+               {  
+                   request.setAttribute("message", "you can only delete your note.");
+                   doGet(request, response);
                    return;
-                     //selectedId = Integer.parseInt(request.getParameter("selectedId"));
-                    //ns.delete(selectedId);
                }
                else
                {
-                   request.setAttribute("message", "It is your note.");
-                   getServletContext().getRequestDispatcher("/WEB-INF/notes/notes.jsp").forward(request, response);
-                   return;
+                   ns.delete(selectedId);
+                   request.setAttribute("message", "Note deleted successfully.");  
+                   doGet( request, response);
                }
-            */
             }
             else if(action.equals("edit"))
             {
@@ -98,9 +95,15 @@ public class NotesServlet extends HttpServlet {
             {
                 String contents = request.getParameter("contents");
                 String title = request.getParameter("title");
+                UserService us = new UserService();
+               
                 User user;
                 //session = request.getSession();
-                user = (User) session.getAttribute("username");
+                user = (User) session.getAttribute("user");
+                //String username = (String) session.getAttribute("username");
+                
+                //user = us.get(username);
+               
                 ns.insert(title, contents, user);
             }
         } catch (Exception ex) {

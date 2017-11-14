@@ -5,6 +5,7 @@ import domainmodel.Note;
 import domainmodel.User;
 import java.util.Date;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 
 public class NoteService {
     
@@ -39,7 +40,7 @@ public class NoteService {
         java.util.Date uDate = new java.util.Date();
         //Date date = new Date();
         java.sql.Date sDate = new java.sql.Date(uDate.getTime());
-        
+       //HttpSession httpSession = request.getSession(true);
         Note note = new Note(0, sDate, title, contents, owner);
         return noteDB.insert(note);
     }
