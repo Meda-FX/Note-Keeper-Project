@@ -7,6 +7,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>NoteKeepr</title>
+        
         <link rel="stylesheet" href="<d:url value='styles/note.css' />" />     
         <link rel="stylesheet" href="<d:url value='styles/note.css' />" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
@@ -21,7 +22,7 @@
         <a class="navbar-brand" href="login">Noteskeepr</a>
          <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="login">Admin</a>
             </li>
             <li class="nav-item">

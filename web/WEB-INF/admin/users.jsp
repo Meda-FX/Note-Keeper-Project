@@ -5,8 +5,8 @@
 <c:headerLogout></c:headerLogout>
 <div class="container">
         <h1>Mange Users</h1>
-        <p class="error">${message}</p>   
-
+        <hr>
+        
          <d:if test="${selectedUser != null}">
             <h3>Edit User</h3>
             <form action="admin" method="POST">
@@ -35,7 +35,7 @@
             </form>
         </d:if>
             <br>
-            
+            <p class="error">${message}</p>   
         <table class="table table-dark">
             <tr>
                 <th>User Name</th>

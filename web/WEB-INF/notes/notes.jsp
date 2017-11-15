@@ -6,9 +6,9 @@
 <div class="container">
     <br>
         <h1>Notes Manager</h1>
+        <hr>
         <h3>Notes</h3>
-        <p class="error">${message}</p>   
-
+        
         <d:if test="${selectedNote != null}">
             <h3>Edit Note</h3>
             <form action="notes" method="POST">
@@ -33,7 +33,8 @@
             </form>
         </d:if>
         
-            <br>
+        <br>
+        <p class="error">${message}</p>   
         <table class="table table-dark">
             <tr>
                 <th>Note Id</th>
