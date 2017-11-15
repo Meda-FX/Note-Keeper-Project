@@ -3,7 +3,8 @@
 <%@taglib prefix="d" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:headerLogout></c:headerLogout>
-
+    
+<div class="container">
         <h1>User Account</h1>
         <h2>Welcome ${username}</h2>       
 
@@ -21,8 +22,8 @@
                 <input type="hidden" name="action" value="edit">
                 <input type="submit" value="Save">
             </form>
-        
-        <table>
+                <br>
+        <table class="table table-dark">
             <tr>
                 <th>User Name</th>
                 <th>Password</th>
@@ -58,6 +59,6 @@
             </tr>
            <%--</d:forEach>--%>
         </table>
-            
+</div>  
     </body>
 </html>

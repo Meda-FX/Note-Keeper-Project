@@ -70,14 +70,19 @@ public class AdminServlet extends HttpServlet {
         String accountHolder = (String)session.getAttribute("username");     
         String selectedUser = request.getParameter("selectedUser");
         
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String email = request.getParameter("email");
+        String firstname = request.getParameter("firstname");
+        String lastname = request.getParameter("lastname");
+        
         if(action == null) 
         {
             action = "";
         }
         
         UserService us = new UserService();
-        try { 
-            
+        try {             
             if(action.equals("delete"))
             { 
                 user = us.get(selectedUser);
@@ -108,22 +113,30 @@ public class AdminServlet extends HttpServlet {
             } 
             else if(action.equals("edit"))
             {
-                String username = request.getParameter("username");
-                String password = request.getParameter("password");
-                String email = request.getParameter("email");
-                String firstname = request.getParameter("firstname");
-                String lastname = request.getParameter("lastname");
+//                String username = request.getParameter("username");
+//                String password = request.getParameter("password");
+//                String email = request.getParameter("email");
+//                String firstname = request.getParameter("firstname");
+//                String lastname = request.getParameter("lastname");
                 
                 us.update(username, email, password, firstname, lastname);  
                 doGet(request, response);
                 
             } else if(action.equals("add"))
             {
-                String username = request.getParameter("username");
-                String password = request.getParameter("password");
-                String email = request.getParameter("email");
-                String firstname = request.getParameter("firstname");
-                String lastname = request.getParameter("lastname");
+//                String username = request.getParameter("username");
+//                String password = request.getParameter("password");
+//                String email = request.getParameter("email");
+//                String firstname = request.getParameter("firstname");
+//                String lastname = request.getParameter("lastname");
+                
+                if(username.trim().isEmpty() || password.trim().isEmpty() || email.trim().isEmpty() || 
+                        firstname.trim().isEmpty() || lastname.trim().isEmpty())
+                {
+                    request.setAttribute("message", "Please fill in the form.");
+                    doGet(request, response);
+                    return;
+                }
                 
                 us.insert(username, password, email, true, firstname, lastname);
                 doGet(request, response);
@@ -131,7 +144,6 @@ public class AdminServlet extends HttpServlet {
         } catch (Exception ex) {
             request.setAttribute("message", "Could not perform that action.");
         }
-        
         
         List<User> users = null;
         try {

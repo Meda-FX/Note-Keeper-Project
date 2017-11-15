@@ -3,10 +3,11 @@
 <%@taglib prefix="d" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:headerLogout></c:headerLogout>
-
+<div class="container">
+    <br>
         <h1>Notes Manager</h1>
         <h3>Notes</h3>
-        <p>${message}</p>
+        <p class="error">${message}</p>   
 
         <d:if test="${selectedNote != null}">
             <h3>Edit Note</h3>
@@ -32,8 +33,8 @@
             </form>
         </d:if>
         
-            
-        <table>
+            <br>
+        <table class="table table-dark">
             <tr>
                 <th>Note Id</th>
                 <th>Note Title</th>
@@ -65,6 +66,6 @@
                 </tr>
             </d:forEach>
         </table>
-            
+</div>
     </body>
 </html>

@@ -95,8 +95,13 @@ public class NotesServlet extends HttpServlet {
             {
                 String contents = request.getParameter("contents");
                 String title = request.getParameter("title");
-                UserService us = new UserService();
-               
+                if(contents.trim().isEmpty() || contents == null || title.trim().isEmpty())
+                {
+                    request.setAttribute("message", "Please fill in the form.");
+                    doGet(request, response);
+                    return;
+                }
+                UserService us = new UserService();               
                 User user;
                 //session = request.getSession();
                 user = (User) session.getAttribute("user");

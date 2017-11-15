@@ -3,9 +3,10 @@
 <%@taglib prefix="d" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:headerLogout></c:headerLogout>
-
+<div class="container">
         <h1>Mange Users</h1>
         <p class="error">${message}</p>   
+
          <d:if test="${selectedUser != null}">
             <h3>Edit User</h3>
             <form action="admin" method="POST">
@@ -33,8 +34,9 @@
                 <input type="submit" value="Save">
             </form>
         </d:if>
+            <br>
             
-        <table>
+        <table class="table table-dark">
             <tr>
                 <th>User Name</th>
                 <th>Password</th>
@@ -43,7 +45,7 @@
                 <th>First Name</th>
                 <th>Last Name</th>
             </tr>          
-            
+            <br>
         <d:forEach var="user" items="${users}">
             <tr>
                 <td>${user.username}</td>
@@ -70,6 +72,6 @@
             </tr>
            </d:forEach>
         </table>
-        
+</div>
     </body>
 </html>
