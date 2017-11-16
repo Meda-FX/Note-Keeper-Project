@@ -8,17 +8,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 public class RoleDB {
-    
+
     public int insert(Role role) throws NotesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
-        
+
         try {
-        trans.begin();
-        em.persist(role);
-        trans.commit();
-        return 1;
-        }catch (Exception ex) {
+            trans.begin();
+            em.persist(role);
+            trans.commit();
+            return 1;
+        } catch (Exception ex) {
             trans.rollback();
             Logger.getLogger(RoleDB.class.getName()).log(Level.SEVERE, "Cannot insert " + role.toString(), ex);
             throw new NotesDBException("Error inserting role");
@@ -26,9 +26,9 @@ public class RoleDB {
             em.close();
         }
     }
-    
+
     public int update(Role role) throws NotesDBException {
-              
+
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
@@ -43,13 +43,13 @@ public class RoleDB {
             throw new NotesDBException("Error updating role");
         } finally {
             em.close();
-        }        
+        }
     }
-    
+
     public List<Role> getAll() throws NotesDBException {
-        
+
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        
+
         try {
             List<Role> roles = em.createNamedQuery("Role.findAll", Role.class).getResultList();
             return roles;
@@ -60,14 +60,14 @@ public class RoleDB {
             em.close();
         }
     }
-    
-     public Role getRole(int roleId) throws NotesDBException {
-        
+
+    public Role getRole(int roleId) throws NotesDBException {
+
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        
+
         try {
             //the parameters are Entity call and Object primary key
-            Role role = em.find(Role.class, roleId);            
+            Role role = em.find(Role.class, roleId);
             return role;
         } catch (Exception ex) {
             Logger.getLogger(RoleDB.class.getName()).log(Level.SEVERE, "Cannot read role", ex);
@@ -76,12 +76,12 @@ public class RoleDB {
             em.close();
         }
     }
-     
+
     public int delete(Role role) throws NotesDBException {
-        
+
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
-        
+
         try {
             trans.begin();
             em.remove(em.merge(role));
@@ -95,5 +95,5 @@ public class RoleDB {
             em.close();
         }
     }
-    
+
 }

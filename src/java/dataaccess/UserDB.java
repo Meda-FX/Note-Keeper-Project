@@ -10,17 +10,17 @@ import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 public class UserDB {
-    
+
     public int insert(User user) throws NotesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
-        
+
         try {
-        trans.begin();
-        em.persist(user);
-        trans.commit();
-        return 1;
-        }catch (Exception ex) {
+            trans.begin();
+            em.persist(user);
+            trans.commit();
+            return 1;
+        } catch (Exception ex) {
             trans.rollback();
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot insert " + user.toString(), ex);
             throw new NotesDBException("Error inserting user");
@@ -28,9 +28,9 @@ public class UserDB {
             em.close();
         }
     }
-    
+
     public int update(User user) throws NotesDBException {
-              
+
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
@@ -45,13 +45,13 @@ public class UserDB {
             throw new NotesDBException("Error updating user");
         } finally {
             em.close();
-        }        
+        }
     }
-    
+
     public List<User> getAll() throws NotesDBException {
-        
+
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        
+
         try {
             List<User> users = em.createNamedQuery("User.findAll", User.class).getResultList();
             return users;
@@ -62,14 +62,14 @@ public class UserDB {
             em.close();
         }
     }
-    
+
     public User getUser(String username) throws NotesDBException {
-        
+
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        
+
         try {
             //the parameters are Entity call and Object primary key
-            User user = em.find(User.class, username);            
+            User user = em.find(User.class, username);
             return user;
         } catch (Exception ex) {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot read users", ex);
@@ -78,12 +78,12 @@ public class UserDB {
             em.close();
         }
     }
-    
+
     public int delete(User user) throws NotesDBException {
-        
+
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
-        
+
         try {
             trans.begin();
             em.remove(em.merge(user));
@@ -97,37 +97,4 @@ public class UserDB {
             em.close();
         }
     }
-    
-    /*
-    public static User checkUser(String username, String password) {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        String qString = "SELECT u FROM User u " +
-                         "WHERE u.username = :username " + 
-                         "and u.password = :password";
-        TypedQuery<User> q = em.createQuery(qString, User.class);
-        q.setParameter("username", username);
-        q.setParameter("password", password);
-
-        User user = null;
-        try {
-            user = q.getSingleResult();
-        } catch (NoResultException e) {
-            System.out.println(e);
-        } finally {
-            em.close();
-        }
-        return user;
-    }
-*/
-
-
-//    public int logicallyDelete(User user) throws UserDBException
-//    {
-//        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-//        EntityTransaction trans = em.getTransaction();
-//        
-//        trans.begin();
-//        
-//    }
-    
 }

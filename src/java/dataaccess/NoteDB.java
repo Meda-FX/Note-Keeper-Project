@@ -18,7 +18,7 @@ public class NoteDB {
     public int insert(Note note) throws NotesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
-        
+
         try {
             trans.begin();
             em.persist(note);
@@ -34,7 +34,7 @@ public class NoteDB {
     }
 
     public int update(Note note) throws NotesDBException {
-        
+
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
@@ -53,9 +53,9 @@ public class NoteDB {
     }
 
     public List<Note> getAll() throws NotesDBException {
-        
+
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        
+
         try {
             List<Note> notes = em.createNamedQuery("Note.findAll", Note.class).getResultList();
             return notes;
@@ -67,10 +67,9 @@ public class NoteDB {
         }
     }
 
-    public Note getNote(int noteId) throws NotesDBException 
-    {
+    public Note getNote(int noteId) throws NotesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        
+
         try {
             Note note = em.find(Note.class, noteId);
             return note;
@@ -82,11 +81,10 @@ public class NoteDB {
         }
     }
 
-    public int delete(Note note) throws NotesDBException 
-    {
+    public int delete(Note note) throws NotesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
-        
+
         try {
             trans.begin();
             em.remove(em.merge(note));

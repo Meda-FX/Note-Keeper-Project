@@ -46,7 +46,11 @@ INSERT INTO `User` VALUES ('barb', 'password', 'cprg352+barb@gmail.com', 0, 'Bar
 INSERT INTO `User` VALUES ('carl', 'password', 'cprg352+carl@gmail.com', 1, 'Carl', 'Carlson', 2);
 INSERT INTO `User` VALUES ('meda', 'password', 'meda@gmail.com', 1, 'Meda', 'Bob', 2);
 
+
 INSERT INTO `Note` (`DateCreated`, `Title`, `Contents`, `Owner`) VALUES (NOW(), 'Sample note 1', 'This is a sample note.\n\nMore text in the sample note.', 'anne');
 INSERT INTO `Note` (`DateCreated`, `Title`, `Contents`, `Owner`) VALUES (NOW(), 'Sample note 2', 'This is a sample note.\n\nMore text in the sample note.', 'anne');
 INSERT INTO `Note` (`DateCreated`, `Title`, `Contents`, `Owner`) VALUES (NOW(), 'Sample note 3', 'This is a sample note.\n\nMore text in the sample note.', 'anne');
-INSERT INTO `Note` (`DateCreated`, `Title`, `Contents`, `Owner`) VALUES (NOW(), 'Sample note 4', 'This is a sample note.\n\nMore text in the sample note.', 'meda');
+INSERT INTO `Note` (`DateCreated`, `Title`, `Contents`, `Owner`) VALUES (NOW(), 'Sample note 4', 'This is a sample note by meda 1.', 'meda');
+INSERT INTO `Note` (`DateCreated`, `Title`, `Contents`, `Owner`) VALUES (NOW(), 'Sample note 4', 'This is a sample note by meda 2.', 'meda');
+INSERT INTO `Note` (`DateCreated`, `Title`, `Contents`, `Owner`) VALUES (NOW(), 'Sample note 4', 'This is a sample note by meda 3.', 'meda');
+INSERT INTO `Note` (`DateCreated`, `Title`, `Contents`, `Owner`) VALUES (NOW(), 'Sample note 4', 'This is a sample note by meda 4.', 'meda');

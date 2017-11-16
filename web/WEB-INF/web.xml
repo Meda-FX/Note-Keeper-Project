@@ -23,7 +23,7 @@
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>servlets.LoginServlet</servlet-class>
-    </servlet>
+    </servlet>    
     <servlet-mapping>
         <servlet-name>NoteServlets</servlet-name>
         <url-pattern>/notes</url-pattern>

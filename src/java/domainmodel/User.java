@@ -80,6 +80,7 @@ public class User implements Serializable {
         this.firstname = firstname;
         this.lastname = lastname;
     }
+
     public User(String username, String password, String email, boolean active, String firstname, String lastname, Role role) {
         this.username = username;
         this.password = password;
@@ -89,7 +90,6 @@ public class User implements Serializable {
         this.lastname = lastname;
         this.role = role;
     }
-    
 
     public String getUsername() {
         return username;
@@ -180,5 +180,5 @@ public class User implements Serializable {
     public String toString() {
         return "domainmodel.User[ username=" + username + " ]";
     }
-    
+
 }
