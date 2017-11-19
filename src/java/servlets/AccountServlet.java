@@ -74,7 +74,7 @@ public class AccountServlet extends HttpServlet {
                 String email = request.getParameter("email");
                 String firstname = request.getParameter("firstname");
                 String lastname = request.getParameter("lastname");
-                us.update(username, email, password, firstname, lastname);
+                //us.update(username, email, password, firstname, lastname);
                 doGet(request, response);
             }
         } catch (Exception ex) {

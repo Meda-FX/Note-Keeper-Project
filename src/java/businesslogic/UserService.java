@@ -2,6 +2,7 @@
 package businesslogic;
 
 import dataaccess.UserDB;
+import domainmodel.Company;
 import domainmodel.Role;
 import domainmodel.User;
 import java.util.List;
@@ -22,13 +23,14 @@ public class UserService {
         return userDB.getAll();
     }
     
-    public int update(String username, String email, String password, String firstname, String lastname) throws Exception {
+    public int update(String username, String email, String password, String firstname, String lastname, boolean activation) throws Exception {
        
         User user = userDB.getUser(username);
         
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);
+        user.setActive(activation);
         user.setFirstname(firstname);
         user.setLastname(lastname);
         
@@ -49,11 +51,19 @@ public class UserService {
         //return userDB.delete(deleteUser);
     }
     
-    public int insert(String username, String password, String email, boolean active, String firstname, String lastname) throws Exception {
-        Role role = new Role();
-        RoleService rs = new RoleService();
-        role = rs.get(2);
-        User user = new User(username, password, email, active, firstname, lastname, role);
+    public int insert(String username, String password, String email, boolean active, String firstname, 
+            String lastname) throws Exception {
+        
+        User user = new User(username, password, email, active, firstname, lastname);
+        Role role = new Role(2);  // default regular user role
+        user.setRole(role);
+        Company comp = new Company(3); //belongs to little pony company by default
+        user.setCompany(comp);
+//        RoleService rs = new RoleService();
+//        role = rs.get(2);        
+        
+        //User user = new User(username, password, email, active, firstname, lastname, role, comp);
+        //User user = new User(username, password, email, active, firstname, lastname);
         return  userDB.insert(user);
     }
 }

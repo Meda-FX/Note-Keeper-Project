@@ -11,7 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -59,10 +58,13 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "Lastname")
     private String lastname;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private Collection<Note> noteCollection;
+    @JoinColumn(name = "Company", referencedColumnName = "CompanyID")
+    @ManyToOne(optional = false)
+    private Company company;
     @JoinColumn(name = "Role", referencedColumnName = "RoleID")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Role role;
 
     public User() {
@@ -80,8 +82,9 @@ public class User implements Serializable {
         this.firstname = firstname;
         this.lastname = lastname;
     }
-
-    public User(String username, String password, String email, boolean active, String firstname, String lastname, Role role) {
+    
+    public User(String username, String password, String email, boolean active, String firstname, 
+            String lastname, Role role, Company company) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -89,6 +92,7 @@ public class User implements Serializable {
         this.firstname = firstname;
         this.lastname = lastname;
         this.role = role;
+        this.company = company;
     }
 
     public String getUsername() {
@@ -148,6 +152,14 @@ public class User implements Serializable {
         this.noteCollection = noteCollection;
     }
 
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
     public Role getRole() {
         return role;
     }
@@ -180,5 +192,5 @@ public class User implements Serializable {
     public String toString() {
         return "domainmodel.User[ username=" + username + " ]";
     }
-
+    
 }

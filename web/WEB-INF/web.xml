@@ -40,6 +40,10 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
+       <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/errorPage.jsp</location>
+    </error-page>
     <session-config>
         <session-timeout> 30 </session-timeout>
     </session-config>

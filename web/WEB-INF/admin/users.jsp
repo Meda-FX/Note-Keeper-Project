@@ -1,41 +1,77 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib tagdir="/WEB-INF/tags" prefix="c" %>
-<%@taglib prefix="d" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<c:headerLogout></c:headerLogout>
-    <div class="container">
-        <h1>Mange Users</h1>
+<%@ include file="/WEB-INF/includes/header.jsp" %>
+   
+        <h1>System Admin - Manage Users</h1>
         <hr>
-
-    <d:if test="${selectedUser != null}">
-        <h3>Edit User</h3>
-        <form action="admin" method="POST">
-            User Name: <br> <input type="text" name="username" value="${selectedUser.username}"><br>
-            Password: <br> <input type="password" name="password" value="${selectedUser.password}" ><br>                
-            Email: <br> <input type="text" name="email" value="${selectedUser.email}"><br>
-            Active: <br> <input type="text" name="active" value="${selectedUser.active}" readonly><br>
-            First Name: <br> <input type="text" name="firstname" value="${selectedUser.firstname}"><br>
-            Last Name: <br> <input type="text" name="lastname" value="${selectedUser.lastname}"><br>
+    <c:if test="${selectedUser != null}">
+        <h3>Edit User</h3>        
+        <form action="admin" method="post">
+            <div class="form-group">
+                <label for="username"> User Name:</label>
+                <input type="text" class="form-control" id="username" name="username" value="${selectedUser.username}">
+            </div>
+            <div class="form-group">
+                <label for="password"> Password:</label>
+                <input type="password" class="form-control" id="password" name="password" value="${selectedUser.password}">
+            </div>
+            <div class="form-group">
+                <label for="email"> Email:</label>
+                <input type="email" class="form-control" id="email" name="email" value="${selectedUser.email}">
+            </div>
+            <div class="form-group">
+                <label for="active"> Active: </label>
+                <input type="text" class="form-control" id="active" name="active" value="${selectedUser.active}">
+            </div>
+            <div class="form-group">
+                <label for="firstname"> First Name: </label>
+                <input type="text" class="form-control" id="firstname" name="firstname" value="${selectedUser.firstname}">
+            </div>
+            <div class="form-group">
+                <label for="lastname"> Last Name: </label>
+                <input type="text" class="form-control" id="lastname" name="lastname" value="${selectedUser.lastname}">
+            </div>            
+       
             <input type="hidden" name="action" value="edit"> <br>
             <input type="submit" value="Save">
-        </form>
-    </d:if>
+        </form>  
+    </c:if>
 
-    <d:if test="${selectedUser == null}">
+    <c:if test="${selectedUser == null}">
         <h3>Add User</h3>
-        <form action="admin" method="POST">
-            User Name: <br> <input type="text" name="username"><br>
-            Password: <br> <input type="password" name="password" ><br>                
-            Email: <br> <input type="text" name="email"><br>
-            Active: <br> <input type="text" name="active" readonly><br>
-            First Name: <br> <input type="text" name="firstname" ><br>
-            Last Name: <br> <input type="text" name="lastname" ><br>
+        
+         <form action="admin" method="post">
+            <div class="form-group">
+                <label for="username"> User Name:</label>
+                <input type="text" class="form-control" id="username" name="username" >
+            </div>
+            <div class="form-group">
+                <label for="password"> Password:</label>
+                <input type="password" class="form-control" id="password" name="password" >
+            </div>
+            <div class="form-group">
+                <label for="email"> Email:</label>
+                <input type="email" class="form-control" id="email" name="email" >
+            </div>
+            <div class="form-group">
+                <label for="active"> Active: </label>
+                <input type="text" class="form-control" id="active" name="active">
+            </div>
+            <div class="form-group">
+                <label for="firstname"> First Name: </label>
+                <input type="text" class="form-control" id="firstname" name="firstname">
+            </div>
+            <div class="form-group">
+                <label for="lastname"> Last Name: </label>
+                <input type="text" class="form-control" id="lastname" name="lastname">
+            </div>      
             <input type="hidden" name="action" value="add">
             <input type="submit" value="Save">
-        </form>
-    </d:if>
+        </form> 
+    </c:if>
     <br>
     <p class="error">${message}</p>   
+    </div> <!-- End of Container one -->
+    
+    <div class="container-fluid "><!-- Begin of container two -->
     <table class="table table-dark">
         <tr>
             <th>User Name</th>
@@ -44,16 +80,20 @@
             <th>Active</th>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Role</th>
+            <th>Company</th>
         </tr>          
         <br>
-        <d:forEach var="user" items="${users}">
+        <c:forEach var="user" items="${users}">
             <tr>
                 <td>${user.username}</td>
                 <td>${user.password}</td>
                 <td>${user.email}</td>
                 <td>${user.active}</td>
                 <td>${user.firstname}</td>
-                <td>${user.lastname}</td>
+                <td>${user.lastname}</td>                
+                <td>${user.role.roleName}</td>
+                <td>${user.company.companyName}</td>
                 <td>
                     <form action="admin" method="post" >
                         <input type="submit" value="Delete">
@@ -70,8 +110,9 @@
                     </form>
                 </td>
             </tr>
-        </d:forEach>
+        </c:forEach>
     </table>
 </div>
-</body>
-</html>
+</div> <!-- End of Container two -->
+     <br><br>
+    <%@ include file="/WEB-INF/includes/footer.jsp" %>

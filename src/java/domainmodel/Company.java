@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,51 +26,52 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author 608964
  */
 @Entity
-@Table(name = "role")
+@Table(name = "company")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r")
-    , @NamedQuery(name = "Role.findByRoleID", query = "SELECT r FROM Role r WHERE r.roleID = :roleID")
-    , @NamedQuery(name = "Role.findByRoleName", query = "SELECT r FROM Role r WHERE r.roleName = :roleName")})
-public class Role implements Serializable {
+    @NamedQuery(name = "Company.findAll", query = "SELECT c FROM Company c")
+    , @NamedQuery(name = "Company.findByCompanyID", query = "SELECT c FROM Company c WHERE c.companyID = :companyID")
+    , @NamedQuery(name = "Company.findByCompanyName", query = "SELECT c FROM Company c WHERE c.companyName = :companyName")})
+public class Company implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "RoleID")
-    private Integer roleID;
+    @Column(name = "CompanyID")
+    private Integer companyID;
     @Basic(optional = false)
-    @Column(name = "RoleName")
-    private String roleName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
+    @Column(name = "CompanyName")
+    private String companyName;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
     private Collection<User> userCollection;
 
-    public Role() {
+    public Company() {
     }
 
-    public Role(Integer roleID) {
-        this.roleID = roleID;
+    public Company(Integer companyID) {
+        this.companyID = companyID;
     }
 
-    public Role(Integer roleID, String roleName) {
-        this.roleID = roleID;
-        this.roleName = roleName;
+    public Company(Integer companyID, String companyName) {
+        this.companyID = companyID;
+        this.companyName = companyName;
     }
 
-    public Integer getRoleID() {
-        return roleID;
+    public Integer getCompanyID() {
+        return companyID;
     }
 
-    public void setRoleID(Integer roleID) {
-        this.roleID = roleID;
+    public void setCompanyID(Integer companyID) {
+        this.companyID = companyID;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     @XmlTransient
@@ -83,18 +86,18 @@ public class Role implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (roleID != null ? roleID.hashCode() : 0);
+        hash += (companyID != null ? companyID.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Role)) {
+        if (!(object instanceof Company)) {
             return false;
         }
-        Role other = (Role) object;
-        if ((this.roleID == null && other.roleID != null) || (this.roleID != null && !this.roleID.equals(other.roleID))) {
+        Company other = (Company) object;
+        if ((this.companyID == null && other.companyID != null) || (this.companyID != null && !this.companyID.equals(other.companyID))) {
             return false;
         }
         return true;
@@ -102,7 +105,7 @@ public class Role implements Serializable {
 
     @Override
     public String toString() {
-        return "domainmodel.Role[ roleID=" + roleID + " ]";
+        return "domainmodel.Company[ companyID=" + companyID + " ]";
     }
     
 }

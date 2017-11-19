@@ -60,7 +60,17 @@ public class AdminServlet extends HttpServlet {
         String email = request.getParameter("email");
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
-
+        String status = request.getParameter("active");
+        boolean activation = false;
+        if(status.equals("true"))
+        {
+            activation = true;
+        }
+        else
+        {
+            activation = false;
+        }
+            
         if (action == null) {
             action = "";
         }
@@ -72,13 +82,13 @@ public class AdminServlet extends HttpServlet {
                 if (user.getUsername().equals(accountHolder)) {
                     request.setAttribute("message", "You cannot delete yourself.");
                     doGet(request, response);
-                } else {
-                    request.setAttribute("message", "Deleted Successfuly.");
+                } else {                    
                     us.delete(selectedUser);
+                    request.setAttribute("message", "Deleted Successfuly.");
                     doGet(request, response);
                 }
             } else if (action.equals("edit")) {
-                us.update(username, email, password, firstname, lastname);
+                us.update(username, email, password, firstname, lastname, activation);
                 doGet(request, response);
 
             } else if (action.equals("add")) {

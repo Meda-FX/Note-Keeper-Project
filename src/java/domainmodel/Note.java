@@ -10,7 +10,6 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,7 +45,7 @@ public class Note implements Serializable {
     private Integer noteID;
     @Basic(optional = false)
     @Column(name = "DateCreated")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
     @Basic(optional = false)
     @Column(name = "Title")
@@ -55,7 +54,7 @@ public class Note implements Serializable {
     @Column(name = "Contents")
     private String contents;
     @JoinColumn(name = "Owner", referencedColumnName = "Username")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private User owner;
 
     public Note() {
@@ -64,15 +63,15 @@ public class Note implements Serializable {
     public Note(Integer noteID) {
         this.noteID = noteID;
     }
-    
+
     public Note(Integer noteID, Date dateCreated, String title, String contents) {
         this.noteID = noteID;
         this.dateCreated = dateCreated;
         this.title = title;
         this.contents = contents;
     }
-
-    public Note(Integer noteID, Date dateCreated, String title, String contents, User owner) {
+    
+     public Note(Integer noteID, Date dateCreated, String title, String contents, User owner) {
         this.noteID = noteID;
         this.dateCreated = dateCreated;
         this.title = title;

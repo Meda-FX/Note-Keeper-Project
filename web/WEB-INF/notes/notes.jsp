@@ -1,58 +1,72 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib tagdir="/WEB-INF/tags" prefix="c" %>
-<%@taglib prefix="d" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<c:headerLogout></c:headerLogout>
-
-    <div class="container">
-        <br>
-        <h1>Notes Manager</h1>
+<%@ include file="/WEB-INF/includes/header.jsp" %>
+        
+        <c:set var="name" value = "${username}" />
+        <c:set var="display" value = "${e:toUpperCase(name)}" />
+       
+        <p>
+        <h1>Notes Manager</h1> 
+         <p>Welcome ${display}</p>
+        </p>
+        
         <hr>
         <h3>Notes</h3>
 
-    <d:if test="${selectedNote != null}">
-        <h3>Edit Note</h3>
-        <form action="notes" method="POST">
-            Note ID: <br> <input type="text" name="noteid" value="${selectedNote.noteID}" readonly><br>
-            Title: <br> <input type="text" name="title" value="${selectedNote.title}" ><br>                
-            Date Created: <br> <input type="text" name="dateCreated" value="${selectedNote.dateCreated}" readonly><br>
-            Contents: <br> <input type="text" name="contents" value="${selectedNote.contents}"><br>
-            <input type="hidden" name="action" value="edit"> <br>
+    <c:if test="${selectedNote != null}">
+        <h3>Edit Note</h3>      
+        <form action="notes" method="post">
+            <div class="form-group">
+                <label for="title"> Title</label>
+                <input type="text" class="form-control" id="title" name="title" value="${selectedNote.title}"  >
+            </div>
+            <div class="form-group">
+                <label for="content">Contents:</label>
+                <input type="text" class="form-control" id="content" name="contents" value="${selectedNote.contents}">
+            </div>
+            <div class="form-group">
+                <label for="dateCreated">Date Created:</label>
+                <input type="text" class="form-control" id="dateCreated" name="dateCreated" value="${selectedNote.dateCreated}" readonly>
+            </div>
+            <input type="hidden" name="action" value="edit">
             <input type="submit" value="Save">
-        </form>
-    </d:if>
+        </form> 
+    </c:if>
 
-    <d:if test="${selectedNote == null}">
-        <h3>Add Note</h3>
-        <form action="notes" method="POST">
-            Note Id: <br> <input type="text" name="noteid" readonly><br>
-            Note Title: <br> <input type="text" name="title"><br>
-            Date Created: <br> <input type="text" name="dateCreated" readonly><br>
-            Contents: <br> <input type="text" name="contents"><br>
+    <c:if test="${selectedNote == null}">
+        <h3>Add Note</h3>        
+           <form action="notes" method="post">
+            <div class="form-group">
+                <label for="title"> Title</label>
+                <input type="text" class="form-control" id="noteid" name="title" >
+            </div>
+            <div class="form-group">
+                <label for="content">Contents:</label>
+                <input type="text" class="form-control" id="content" name="contents">
+            </div>
+            <div class="form-group">
+                <label for="dateCreated">Date Created:</label>
+                <input type="text" class="form-control" id="dateCreated" name="dateCreated" readonly>
+            </div>
             <input type="hidden" name="action" value="add">
             <input type="submit" value="Save">
-        </form>
-    </d:if>
-
+        </form>       
+    </c:if>
+    </div> <!-- end of container 1 -->
+    <div class="container-fluid ">
     <br>
     <p class="error">${message}</p>   
     <table class="table table-dark">
         <tr>
-            <th>Note Id</th>
             <th>Note Title</th>
-            <th>Date Created</th>
             <th>Contents</th>
-            <th>Owner</th>
+            <th>Date Created</th>
         </tr>
        
-        <d:forEach var="note" items="${notes}">
-            <d:if test = "${note.owner.username == user.username}">
+        <c:forEach var="note" items="${notes}">
+            <c:if test = "${note.owner.username == user.username}">
             <tr>
-                <td>${note.noteID}</td>
-                <td>${note.title}</td>
-                <td>${note.dateCreated}</td>
+                <td>${note.title}</td>                
                 <td>${note.contents}</td>
-                <td>${note.owner.username}</td>
+                <td>${note.dateCreated}</td>
                 <td>
                     <form action="notes" method="post" >
                         <input type="submit" value="Delete">
@@ -69,9 +83,9 @@
                     </form>
                 </td>
             </tr>
-            </d:if>
-        </d:forEach>
+            </c:if>
+        </c:forEach>
     </table>
-</div>
-</body>
-</html>
+
+    <br><br>
+    <%@ include file="/WEB-INF/includes/footer.jsp" %>
