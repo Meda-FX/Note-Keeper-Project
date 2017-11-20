@@ -61,7 +61,7 @@ public class AccountServlet extends HttpServlet {
 
         UserService us = new UserService();
         try {
-            if (action.equals("delete")) {
+            if (action.equals("deactivate")) {
                 user = us.get(accountHolder);
                 user.setActive(false);
                 String selectedUser = request.getParameter("selectedUser");
@@ -74,7 +74,7 @@ public class AccountServlet extends HttpServlet {
                 String email = request.getParameter("email");
                 String firstname = request.getParameter("firstname");
                 String lastname = request.getParameter("lastname");
-                //us.update(username, email, password, firstname, lastname);
+                us.update(username, email, password, firstname, lastname);
                 doGet(request, response);
             }
         } catch (Exception ex) {

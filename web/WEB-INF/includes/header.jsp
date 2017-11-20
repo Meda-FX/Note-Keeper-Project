@@ -36,10 +36,10 @@
             <a class="nav-link" href="notes">Notes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">System Admin</a>
+            <a class="nav-link" href="admin">System Administrators</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Company Admin</a>
+            <a class="nav-link" href="companyadmin">Company Administrators</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Companies</a>

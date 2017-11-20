@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class AdminServlet extends HttpServlet {
+public class SystemAdminServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -42,7 +42,7 @@ public class AdminServlet extends HttpServlet {
         }
 
         request.setAttribute("users", users);
-        getServletContext().getRequestDispatcher("/WEB-INF/admin/users.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/systemAdmin/users.jsp").forward(request, response);
     }
 
     @Override
@@ -113,6 +113,6 @@ public class AdminServlet extends HttpServlet {
             Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         request.setAttribute("users", users);
-        getServletContext().getRequestDispatcher("/WEB-INF/admin/users.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/systemAdmin/users.jsp").forward(request, response);
     }
 }

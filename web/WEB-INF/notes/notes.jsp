@@ -86,6 +86,6 @@
             </c:if>
         </c:forEach>
     </table>
-
+    </div>
     <br><br>
     <%@ include file="/WEB-INF/includes/footer.jsp" %>

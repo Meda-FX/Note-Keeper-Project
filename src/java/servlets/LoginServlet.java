@@ -1,7 +1,9 @@
 package servlets;
 
+import businesslogic.CompanyService;
 import businesslogic.RoleService;
 import businesslogic.UserService;
+import domainmodel.Company;
 import domainmodel.Role;
 import domainmodel.User;
 import java.io.IOException;
@@ -47,10 +49,14 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         User user = null;
+        User userComp = null;
         Role role = null;
+        Company company = null;
         UserService us = new UserService();
         RoleService rs = new RoleService();
-
+        CompanyService cs = new CompanyService();
+        
+        
         if (action == null) {
             action = "";
         }
@@ -68,7 +74,7 @@ public class LoginServlet extends HttpServlet {
             }
 
             try {
-                user = us.get(username);
+                user = us.get(username);               
                 if (user == null) //case 1 username exist
                 {
                     request.setAttribute("message", "User name does not exist.");
@@ -84,11 +90,20 @@ public class LoginServlet extends HttpServlet {
                             session.setAttribute("username", username);
                             session.setAttribute("user", user);
                             response.sendRedirect("admin");
-                        } else {
+                        } else if (user.getRole().getRoleID() == 2){
                             session.setAttribute("username", username);
                             session.setAttribute("user", user);
                             response.sendRedirect("notes");
+                        } else
+                        {
+                            userComp = cs.get(username);                            
+                            int compID = userComp.getCompany().getCompanyID();
+                            session.setAttribute("compID", compID);
+                            session.setAttribute("username", username);
+                            session.setAttribute("user", user);                         
+                            response.sendRedirect("companyadmin");
                         }
+                      
                     } else {
                         request.setAttribute("message", "The user is not active.");
                         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
