@@ -16,55 +16,35 @@ public class CompanyService {
         companyDB = new CompanyDB();
     }
     
-    public User get(String username) throws Exception {
-        return  companyDB.getUser(username);
+    public Company getCompany(int companyID) throws Exception {
+        return  companyDB.getCompany(companyID);
     }
     
-    public List<User> getAll() throws Exception {
+    public List<Company> getAll() throws Exception {
         return companyDB.getAll();
     }
     
-    public int update(String username, String email, String password, String firstname, String lastname, boolean activation) throws Exception {
+    public int update(int companyID, String companyName) throws Exception {
        
-        User user = companyDB.getUser(username);
-        
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setEmail(email);
-        user.setActive(activation);
-        user.setFirstname(firstname);
-        user.setLastname(lastname);
-        
-        return companyDB.update(user);
+        Company company = companyDB.getCompany(companyID);
+        company.setCompanyName(companyName);        
+        return companyDB.update(company);
+    }
+   
+    public int delete(int companyID) throws Exception {
+        Company deleteComapny = companyDB.getCompany(companyID);
+        return companyDB.delete(deleteComapny);
     }
     
-    public int update(String username, String email, String password, String firstname, String lastname) throws Exception {
+    public int insert(String companyName) throws Exception {
+        
+        Company comapny = new Company(0, companyName);
        
-        User user = companyDB.getUser(username);
+//        Role role = new Role(2);  // default regular user role
+//        user.setRole(role);
+//        Company comp = new Company(compID); //belongs to little pony company by default
+//        user.setCompany(comp);
         
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setEmail(email);
-        user.setFirstname(firstname);
-        user.setLastname(lastname);
-        
-        return companyDB.update(user);
-    }
-    
-    public int delete(String username) throws Exception {
-        User deleteUser = companyDB.getUser(username);
-        return companyDB.delete(deleteUser);
-    }
-    
-    public int insert(String username, String password, String email, boolean active, String firstname, 
-            String lastname, int compID) throws Exception {
-        
-        User user = new User(username, password, email, active, firstname, lastname);
-        Role role = new Role(2);  // default regular user role
-        user.setRole(role);
-        Company comp = new Company(compID); //belongs to little pony company by default
-        user.setCompany(comp);
-        
-        return  companyDB.insert(user);
+        return  companyDB.insert(comapny);
     }
 }

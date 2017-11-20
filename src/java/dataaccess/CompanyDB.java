@@ -1,5 +1,6 @@
 package dataaccess;
 
+import domainmodel.Company;
 import domainmodel.User;
 import java.util.List;
 import java.util.logging.Level;
@@ -11,86 +12,86 @@ import javax.persistence.TypedQuery;
 
 public class CompanyDB {
 
-    public int insert(User user) throws NotesDBException {
+    public int insert(Company company) throws NotesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
         try {
             trans.begin();
-            em.persist(user);
+            em.persist(company);
             trans.commit();
             return 1;
         } catch (Exception ex) {
             trans.rollback();
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot insert " + user.toString(), ex);
+            Logger.getLogger(CompanyDB.class.getName()).log(Level.SEVERE, "Cannot insert " + company.toString(), ex);
             throw new NotesDBException("Error inserting user");
         } finally {
             em.close();
         }
     }
 
-    public int update(User user) throws NotesDBException {
+    public int update(Company company) throws NotesDBException {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
         try {
             trans.begin();
-            em.merge(user);
+            em.merge(company);
             trans.commit();
             return 1;
         } catch (Exception ex) {
             trans.rollback();
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot update " + user.toString(), ex);
+            Logger.getLogger(CompanyDB.class.getName()).log(Level.SEVERE, "Cannot update " + company.toString(), ex);
             throw new NotesDBException("Error updating user");
         } finally {
             em.close();
         }
     }
 
-    public List<User> getAll() throws NotesDBException {
+    public List<Company> getAll() throws NotesDBException {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
         try {
-            List<User> users = em.createNamedQuery("User.findAll", User.class).getResultList();
-            return users;
+            List<Company> companies = em.createNamedQuery("Company.findAll", Company.class).getResultList();
+            return companies;
         } catch (Exception ex) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot read user", ex);
+            Logger.getLogger(CompanyDB.class.getName()).log(Level.SEVERE, "Cannot read user", ex);
             throw new NotesDBException("Error getting users");
         } finally {
             em.close();
         }
     }
 
-    public User getUser(String username) throws NotesDBException {
+    public Company getCompany(int companyID) throws NotesDBException {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
         try {           
-            User user = em.find(User.class, username);
-            return user;
+            Company company = em.find(Company.class, companyID);
+            return company;
         } catch (Exception ex) {
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot read users", ex);
+            Logger.getLogger(CompanyDB.class.getName()).log(Level.SEVERE, "Cannot read users", ex);
             throw new NotesDBException("Error getting user");
         } finally {
             em.close();
         }
     }
 
-    public int delete(User user) throws NotesDBException {
+    public int delete(Company company) throws NotesDBException {
 
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
         try {
             trans.begin();
-            em.remove(em.merge(user));
+            em.remove(em.merge(company));
             trans.commit();
             return 1;
         } catch (Exception ex) {
             trans.rollback();
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot delete " + user.toString(), ex);
+            Logger.getLogger(CompanyDB.class.getName()).log(Level.SEVERE, "Cannot delete " + company.toString(), ex);
             throw new NotesDBException("Error deleting user");
         } finally {
             em.close();

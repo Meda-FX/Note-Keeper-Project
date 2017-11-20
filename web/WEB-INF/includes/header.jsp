@@ -42,7 +42,7 @@
             <a class="nav-link" href="companyadmin">Company Administrators</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Companies</a>
+            <a class="nav-link" href="managecompanies">Companies</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="login">Logout</a>

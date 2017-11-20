@@ -96,7 +96,7 @@ public class LoginServlet extends HttpServlet {
                             response.sendRedirect("notes");
                         } else
                         {
-                            userComp = cs.get(username);                            
+                            userComp = us.get(username);                        
                             int compID = userComp.getCompany().getCompanyID();
                             session.setAttribute("compID", compID);
                             session.setAttribute("username", username);

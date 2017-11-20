@@ -80,25 +80,23 @@ public class CompanyAdminServlet extends HttpServlet {
         {
             activation = false;
         }
-            
-       
 
-        //UserService us = new UserService();
-        CompanyService cs = new CompanyService();
+        UserService us = new UserService();
+        //CompanyService cs = new CompanyService();
         try {
             if (action.equals("delete")) {
-                user = cs.get(selectedUser);
+                user = us.get(selectedUser);
                 if (user.getUsername().equals(accountHolder)) {
                     request.setAttribute("message", "You cannot delete yourself.");
                     doGet(request, response);
                 } else {                    
-                    cs.delete(selectedUser);
+                    us.delete(selectedUser);
                     request.setAttribute("message", "Deleted Successfuly.");
                     doGet(request, response);
                 }
             } else if (action.equals("edit")) {
                 
-                cs.update(username, email, password, firstname, lastname, activation);
+                us.update(username, email, password, firstname, lastname, activation);
                 doGet(request, response);
 
             } else if (action.equals("add")) {
@@ -108,21 +106,22 @@ public class CompanyAdminServlet extends HttpServlet {
                     doGet(request, response);
                     return;
                 }
-
-                cs.insert(username, password, email, true, firstname, lastname, compId);
+                
+                us.insert(username, password, email, true, firstname, lastname);
+                //us.insert(username, password, email, true, firstname, lastname, compId);
                 doGet(request, response);
             }
         } catch (Exception ex) {
             request.setAttribute("message", "Could not perform that action.");
         }
 
-        List<User> comp = null;
+        List<User> users = null;
         try {
-            comp = (List<User>) cs.getAll();
+            users = (List<User>) us.getAll();
         } catch (Exception ex) {
             Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        request.setAttribute("comp", comp);
+        request.setAttribute("users", users);
         getServletContext().getRequestDispatcher("/WEB-INF/companyAdmin/users.jsp").forward(request, response);
     }
 }

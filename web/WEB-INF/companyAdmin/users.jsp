@@ -97,7 +97,7 @@
                     <form action="companyadmin" method="post" >
                         <input type="submit" value="Delete">
                         <input type="hidden" name="action" value="delete">
-                        <input type="hidden" name="selectedUser" value="${user.username}">
+                        <input type="hidden" name="selectedId" value="${user.company.companyID}">
                     </form>
                 </td>
                 <!--This is to update the fields-->
@@ -105,7 +105,7 @@
                     <form action="companyadmin" method="get">
                         <input type="submit" value="Edit">
                         <input type="hidden" name="action" value="view">
-                        <input type="hidden" name="selectedUser" value="${user.username}">
+                        <input type="hidden" name="selectedId" value="${user.company.companyID}">
                     </form>
                 </td>
             </tr>
