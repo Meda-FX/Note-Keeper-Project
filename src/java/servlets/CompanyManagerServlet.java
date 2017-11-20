@@ -3,6 +3,7 @@ package servlets;
 import businesslogic.CompanyService;
 import businesslogic.RoleService;
 import businesslogic.UserService;
+import domainmodel.Company;
 import domainmodel.Role;
 import domainmodel.User;
 import java.io.IOException;
@@ -16,22 +17,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class CompanyAdminServlet extends HttpServlet {
+public class CompanyManagerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        UserService us = new UserService();
+        
+        CompanyService cs = new CompanyService();
+       // UserService us = new UserService();
         String action = request.getParameter("action");
-        HttpSession session = request.getSession();
-        int compId = (int) session.getAttribute("compID");
-        request.setAttribute("copmID", compId);
 
         if (action != null && action.equals("view")) {
             String selectedUser = request.getParameter("selectedUser");
             try {
-                User user = us.get(selectedUser);
+                Company company = cs.get(action);
                 request.setAttribute("selectedUser", user);
             } catch (Exception ex) {
                 Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -46,7 +45,7 @@ public class CompanyAdminServlet extends HttpServlet {
         }
 
         request.setAttribute("users", users);
-        getServletContext().getRequestDispatcher("/WEB-INF/companyAdmin/users.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/systemAdmin/users.jsp").forward(request, response);
     }
 
     @Override
@@ -55,7 +54,6 @@ public class CompanyAdminServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
-        int compId = (int) session.getAttribute("compID");
         User user;
         String accountHolder = (String) session.getAttribute("username");
         String selectedUser = request.getParameter("selectedUser");
@@ -66,13 +64,8 @@ public class CompanyAdminServlet extends HttpServlet {
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
         String status = request.getParameter("active");
-        boolean activation;
-        
-        if (action == null) {
-            action = "";
-        }
-        
-        if(status != null && status.equals("true"))
+        boolean activation = false;
+        if(status.equals("true"))
         {
             activation = true;
         }
@@ -81,24 +74,24 @@ public class CompanyAdminServlet extends HttpServlet {
             activation = false;
         }
             
-       
+        if (action == null) {
+            action = "";
+        }
 
-        //UserService us = new UserService();
-        CompanyService cs = new CompanyService();
+        UserService us = new UserService();
         try {
             if (action.equals("delete")) {
-                user = cs.get(selectedUser);
+                user = us.get(selectedUser);
                 if (user.getUsername().equals(accountHolder)) {
                     request.setAttribute("message", "You cannot delete yourself.");
                     doGet(request, response);
                 } else {                    
-                    cs.delete(selectedUser);
+                    us.delete(selectedUser);
                     request.setAttribute("message", "Deleted Successfuly.");
                     doGet(request, response);
                 }
             } else if (action.equals("edit")) {
-                
-                cs.update(username, email, password, firstname, lastname, activation);
+                us.update(username, email, password, firstname, lastname, activation);
                 doGet(request, response);
 
             } else if (action.equals("add")) {
@@ -109,20 +102,20 @@ public class CompanyAdminServlet extends HttpServlet {
                     return;
                 }
 
-                cs.insert(username, password, email, true, firstname, lastname, compId);
+                us.insert(username, password, email, true, firstname, lastname);
                 doGet(request, response);
             }
         } catch (Exception ex) {
             request.setAttribute("message", "Could not perform that action.");
         }
 
-        List<User> comp = null;
+        List<User> users = null;
         try {
-            comp = (List<User>) cs.getAll();
+            users = (List<User>) us.getAll();
         } catch (Exception ex) {
             Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        request.setAttribute("comp", comp);
-        getServletContext().getRequestDispatcher("/WEB-INF/companyAdmin/users.jsp").forward(request, response);
+        request.setAttribute("users", users);
+        getServletContext().getRequestDispatcher("/WEB-INF/systemAdmin/users.jsp").forward(request, response);
     }
 }

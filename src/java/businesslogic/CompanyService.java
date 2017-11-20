@@ -57,13 +57,14 @@ public class CompanyService {
     }
     
     public int insert(String username, String password, String email, boolean active, String firstname, 
-            String lastname) throws Exception {
+            String lastname, int compID) throws Exception {
         
         User user = new User(username, password, email, active, firstname, lastname);
         Role role = new Role(2);  // default regular user role
         user.setRole(role);
-        Company comp = new Company(3); //belongs to little pony company by default
+        Company comp = new Company(compID); //belongs to little pony company by default
         user.setCompany(comp);
+        
         return  companyDB.insert(user);
     }
 }

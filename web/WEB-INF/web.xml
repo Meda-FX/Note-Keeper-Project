@@ -28,6 +28,10 @@
         <servlet-name>CompanyAdminServlet</servlet-name>
         <servlet-class>servlets.CompanyAdminServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CompanyMangerServlet</servlet-name>
+        <servlet-class>servlets.CompanyMangerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NoteServlets</servlet-name>
         <url-pattern>/notes</url-pattern>
@@ -51,6 +55,10 @@
     <servlet-mapping>
         <servlet-name>CompanyAdminServlet</servlet-name>
         <url-pattern>/companyadmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CompanyMangerServlet</servlet-name>
+        <url-pattern>/managecompanies</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout> 30 </session-timeout>
