@@ -33,7 +33,7 @@ public class SystemAdminServlet extends HttpServlet {
                 Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
+        
         List<User> users = null;
         try {
             users = us.getAll();
@@ -98,10 +98,9 @@ public class SystemAdminServlet extends HttpServlet {
                     doGet(request, response);
                     return;
                 }
-
                 us.insert(username, password, email, true, firstname, lastname);
                 doGet(request, response);
-            }
+            }            
         } catch (Exception ex) {
             request.setAttribute("message", "Could not perform that action.");
         }

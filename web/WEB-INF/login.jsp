@@ -13,6 +13,11 @@
         <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
     </div>
     <button type="submit" class="btn btn-dark">Login</button>
+    <hr>
+    <label>
+        <a href="register?action=register">New user Register</a>
+    </label>
+            
 </form>  
 <p class="error">${message}</p>   
 </div>

@@ -35,6 +35,10 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("message", "You've been logged out successfully.");
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         }
+        else if(action.equals("register"))
+        {
+            getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+        }
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
     }
 
@@ -118,6 +122,7 @@ public class LoginServlet extends HttpServlet {
                 Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+       
     }
 
 }
