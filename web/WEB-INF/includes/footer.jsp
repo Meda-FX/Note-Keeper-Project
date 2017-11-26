@@ -10,9 +10,9 @@
       <p></p>
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Design and developed by Meda. Web-App final project 2017</a>
-          </li>
+         
+            <a class="nav-link" >Design and developed by Meda. Web-App final project 2017</a>
+         
          
         </ul>       
       </div>

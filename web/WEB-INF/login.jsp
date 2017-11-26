@@ -1,25 +1,27 @@
 <%@ include file="includes/header.jsp" %>
 
-<h1>Final Project</h1>
-<h1>Users Login</h1>
-
-<form action="login?action=login" method="post">
+<form id="form-login" action="login?action=login" method="post">
+    <div class="form-header">
+        <h2 >NOTESKEEPR</h2>
+    </div>
     <div class="form-group">
-        <label for="exampleInputEmail1">User Name</label>
         <input type="text" class="form-control" name="username" value="${username}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
     </div>
     <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
         <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
     </div>
-    <button type="submit" class="btn btn-dark">Login</button>
+    <div>
+        <p class="error">${message}</p>   
+    </div>
+    <div>
+        <button class="login-button" type="submit" >Login</button>
+    </div>
     <hr>
     <label>
-        <a href="register?action=register">New user Register</a>
+        <p>
+        <a id="login-footer-link" href="register?action=register">New user Register</a>
+        </p>
     </label>
-            
 </form>  
-<p class="error">${message}</p>   
 </div>
-
 <%@ include file="includes/footer.jsp" %>

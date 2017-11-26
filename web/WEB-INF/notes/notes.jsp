@@ -1,13 +1,11 @@
 <%@ include file="/WEB-INF/includes/header.jsp" %>
-        
+<br>
+    <div class="row">
+        <div class="col-md-9"><h1>Notes Manager</h1></div>
+        <div class="col-md-3"><h3>Welcome ${display}</h3></div>
+    </div>
         <c:set var="name" value = "${username}" />
         <c:set var="display" value = "${e:toUpperCase(name)}" />
-       
-        <p>
-        <h1>Notes Manager</h1> 
-         <p>Welcome ${display}</p>
-        </p>
-        
         <hr>
         <h3>Notes</h3>
 
@@ -35,7 +33,7 @@
         <h3>Add Note</h3>        
            <form action="notes" method="post">
             <div class="form-group">
-                <label for="title"> Title</label>
+                <label for="title"> Title:</label>
                 <input type="text" class="form-control" id="noteid" name="title" >
             </div>
             <div class="form-group">
@@ -54,13 +52,16 @@
     <div class="container-fluid ">
     <br>
     <p class="error">${message}</p>   
-    <table class="table table-dark">
+    <table class="table table-hover">
+        <thead class="thead-dark">
         <tr>
             <th>Note Title</th>
             <th>Contents</th>
             <th>Date Created</th>
+            <th></th>
+            <th></th>
         </tr>
-       
+        </thead>
         <c:forEach var="note" items="${notes}">
             <c:if test = "${note.owner.username == user.username}">
             <tr>

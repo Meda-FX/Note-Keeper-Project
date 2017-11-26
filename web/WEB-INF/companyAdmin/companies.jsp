@@ -1,6 +1,8 @@
 <%@ include file="/WEB-INF/includes/header.jsp" %>
-   
-        <h1>System Admin - Manage Companies</h1>
+   <div class="row">
+        <div class="col-md-9"><h1>System Admin - Manage Companies</h1></div>
+        <div class="col-md-3"><h3>Welcome ${display}</h3></div>
+    </div>
         <hr>
     <c:if test="${selectedCompany != null}">
         <h3>Edit Company</h3>        
@@ -38,11 +40,15 @@
     </div> <!-- End of Container one -->
     
     <div class="container-fluid "><!-- Begin of container two -->
-    <table class="table table-dark">
+    <table class="table table-hover">
+        <thead class="thead-dark">
         <tr>
             <th>Company ID</th>
-            <th>Company Name</th>           
-        </tr>          
+            <th>Company Name</th>   
+            <th>Remove Company</th>
+            <th>Edit Info</th>
+        </tr>   
+        </thead>
         <br>
         <c:forEach var="user" items="${companies}">
              <%--<c:if test = "${user.company.companyID == copmID}">--%>

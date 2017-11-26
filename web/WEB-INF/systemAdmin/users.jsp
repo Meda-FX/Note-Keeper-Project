@@ -1,6 +1,9 @@
 <%@ include file="/WEB-INF/includes/header.jsp" %>
-   
-        <h1>System Admin - Manage Users</h1>
+  <br>
+    <div class="row">
+        <div class="col-md-9"><h1>System Admin - Manage Users</h1></div>
+        <div class="col-md-3"><h3>Welcome ${display}</h3></div>
+    </div>
         <hr>
     <c:if test="${selectedUser != null}">
         <h3>Edit User</h3>        
@@ -72,7 +75,8 @@
     </div> <!-- End of Container one -->
     
     <div class="container-fluid "><!-- Begin of container two -->
-    <table class="table table-dark">
+     <table class="table table-hover">
+        <thead class="thead-dark">
         <tr>
             <th>User Name</th>
             <th>Password</th>
@@ -82,7 +86,10 @@
             <th>Last Name</th>
             <th>Role</th>
             <th>Company</th>
-        </tr>          
+            <th></th>
+            <th></th>
+        </tr>    
+        </thead>
         <br>
         <c:forEach var="user" items="${users}">
             <tr>
@@ -96,7 +103,8 @@
                 <td>${user.company.companyName}</td>
                 <td>
                     <form action="admin" method="post" >
-                        <input type="submit" value="Delete">
+                        <!--<input type="submit" value="Delete">-->
+                        <button type="submit">Submit</button>
                         <input type="hidden" name="action" value="delete">
                         <input type="hidden" name="selectedUser" value="${user.username}">
                     </form>

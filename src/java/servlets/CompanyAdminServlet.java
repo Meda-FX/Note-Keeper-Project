@@ -25,9 +25,17 @@ public class CompanyAdminServlet extends HttpServlet {
         UserService us = new UserService();
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
-        int compId = (int) session.getAttribute("compID");
-        request.setAttribute("copmID", compId);
-
+        
+        //// causing issue
+        int compId = 0;
+        if(session != null)
+        {
+            compId = (int) session.getAttribute("compID");
+            request.setAttribute("copmID", compId);
+        }
+        //(int) session.getAttribute("compID");
+        
+        
         if (action != null && action.equals("view")) {
             String selectedUser = request.getParameter("selectedUser");
             try {
@@ -37,7 +45,7 @@ public class CompanyAdminServlet extends HttpServlet {
                 Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
+        
         List<User> users = null;
         try {
             users = us.getAll();

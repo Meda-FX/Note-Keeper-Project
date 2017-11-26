@@ -1,9 +1,12 @@
 <%@ include file="/WEB-INF/includes/header.jsp" %>
-
-        <h1>User Account</h1>
+<br>
+    <div class="row">
+        <div class="col-md-9"><h1>User Account</h1></div>
+        <div class="col-md-3"><h3>Welcome ${display}</h3></div>
+    </div>
+    
         <d:set var="name" value = "${username}" />
         <d:set var="display" value = "${e:toUpperCase(name)}" />
-        <h2>Welcome ${display}</h2>       
 
     <p class="error">${message}</p>     
     <hr>
@@ -50,7 +53,8 @@
     <br>
     </div> <!-- end of container 1 -->
     <div class="container-fluid">
-    <table class="table table-dark">
+    <table class="table table-hover">
+        <thead class="thead-dark">
         <tr>
             <th>User Name</th>
             <th>Password</th>
@@ -59,8 +63,10 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>Company</th>
+            <th></th>
+            <th></th>
         </tr>          
-
+        </thead>
         <tr>
             <td>${user.username}</td>
             <td>${user.password}</td>
@@ -83,6 +89,7 @@
             <!--This is to update the fields-->
             <td>
                 <form action="account" method="get">
+                    <span class="icon-input-btn"><span class="glyphicon glyphicon-search"></span> <input type="submit" class="btn btn-default" value="Search"></span>
                     <input type="submit" value="Edit">
                     <input type="hidden" name="action" value="view">
                     <input type="hidden" name="selectedUser" value="${user.username}">

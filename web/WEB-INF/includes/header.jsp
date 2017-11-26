@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>NotesKeepr</title>
         <!-- NoteKeepr Styles-->
-        <link rel="stylesheet" href="<c:url value='styles/style.css' />" />
+        <link rel="stylesheet" href="<c:url value='styles/notesKeeprStyle.css' />" />
         <!-- NoteKeepr Styles end here-->
         <!-- Bootstrap Styles-->
         <link rel="stylesheet" href="<d:url value='styles/note.css' />" />
@@ -21,7 +21,7 @@
     </head>
     <body>       
 
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+<nav id="note-nav" class="navbar navbar-expand-md navbar-dark fixed-top">
       <a class="navbar-brand" href="#">Noteskeepr</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -30,22 +30,22 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="account">Account</a>
+            <a id="nav-link-text" class="nav-link" href="account">Account</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="notes">Notes</a>
+            <a  id="nav-link-text" class="nav-link" href="notes">Notes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="admin">System Administrators</a>
+            <a  id="nav-link-text" class="nav-link" href="admin">System Administrators</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="companyadmin">Company Administrators</a>
+            <a id="nav-link-text" class="nav-link" href="companyadmin">Company Administrators</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="managecompanies">Companies</a>
+            <a id="nav-link-text" class="nav-link" href="managecompanies">Companies</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="login">Logout</a>
+            <a id="nav-link-text" class="nav-link" href="login">Logout</a>
           </li>      
         </ul>
           
