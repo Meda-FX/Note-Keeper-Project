@@ -4,6 +4,8 @@
         <div class="col-md-3"><h3>Welcome ${display}</h3></div>
     </div>
         <hr>
+        <div class="row"><!-- row starts here -->
+    <div class="col-xm-12 col-md-8">
     <c:if test="${selectedCompany != null}">
         <h3>Edit Company</h3>        
         <form action="managecompanies" method="post">
@@ -15,8 +17,8 @@
                 <label for="companyName"> Company Name:</label>
                 <input type="text" class="form-control" id="companyName" name="companyName" value="${selectedCompany.companyName}">
             </div>           
-            <input type="hidden" name="action" value="edit">
-            <input type="submit" value="Save">
+            <input id="table-buttons_se" type="hidden" name="action" value="edit">
+            <input id="table-buttons_se" type="submit" value="Save">
         </form>  
     </c:if>
 
@@ -31,16 +33,19 @@
                 <label for="companyName"> Company Name:</label>
                 <input type="text" class="form-control" id="companyName" name="companyName">
             </div>      
-            <input type="hidden" name="action" value="add">
-            <input type="submit" value="Save">
+             <p class="error">${message}</p>   
+            <input id="table-buttons_se" type="hidden" name="action" value="add">
+            <input id="table-buttons_se" type="submit" value="Save">
         </form> 
     </c:if>
+         </div>
+    </div> <!-- row finishes here -->
     <br>
-    <p class="error">${message}</p>   
+    
     </div> <!-- End of Container one -->
     
     <div class="container-fluid "><!-- Begin of container two -->
-    <table class="table table-hover">
+    <table class="table">
         <thead class="thead-dark">
         <tr>
             <th>Company ID</th>
@@ -57,16 +62,16 @@
                 <td>${user.companyName}</td>
                 <td>
                     <form action="managecompanies" method="post" >
-                        <input type="submit" value="Delete">
-                        <input type="hidden" name="action" value="delete">
+                        <input id="table-buttons_se2" type="submit" value="Delete">
+                        <input id="table-buttons_se2" type="hidden" name="action" value="delete">
                         <input type="hidden" name="selectedID" value="${user.companyID}">
                     </form>
                 </td>
                 <!--This is to update the fields-->
                 <td>
                     <form action="managecompanies" method="get">
-                        <input type="submit" value="Edit">
-                        <input type="hidden" name="action" value="view">
+                        <input id="table-buttons_se2" type="submit" value="Edit">
+                        <input id="table-buttons_se2" type="hidden" name="action" value="view">
                         <input type="hidden" name="selectedID" value="${user.companyID}">
                     </form>
                 </td>

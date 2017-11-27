@@ -1,8 +1,37 @@
 body {
-    background-color: #ff0033;
+    background-color: #ffffff;
 }
 .container {
     padding-top: 60px;
+}
+
+.site-wrapper {
+    background-color: #333;
+     background-image: url("https://www.irishtimes.com/polopoly_fs/1.2453158.1449152864!/image/image.jpg");
+    height: 700px;
+    color: #ffffff;
+    padding-top: 200px;
+     
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.errprInner{
+   margin-top: 300%;
+}
+
+.site-wrapper h1 {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 100px;
+}
+
+.site-wrapper p {
+    margin: 0 auto;
+    text-align: center;
 }
 
 .error {
@@ -109,4 +138,66 @@ hr{
     color: #ffffff;
 }
 
- 
+#table-buttons{
+    background: #00BF6B;
+    font-size: 16px;
+    color: #ffffff;
+    border: none;
+    border-radius: 80px;
+    width: 100%;
+    height: auto;
+}
+
+#table-buttons:hover{
+    color: #ffffff;
+    background: #007F47;
+    font-size: 16px;
+    border: none;
+    border-radius: 80px;
+    width: 100%;
+    height: auto;
+}
+
+#table-buttons_se {
+    background: #00BF6B;
+    font-size: 16px;
+    color: #ffffff;
+    border: none;
+    border-radius: 80px;
+    width: 20%;
+    height: 40px;
+}
+
+#table-buttons_se:hover {
+    color: #ffffff;
+    background: #007F47;
+    font-size: 16px;
+    border: none;
+    border-radius: 80px;
+    width: 20%;
+    height: 40px;
+}
+
+#table-buttons_se2 {
+    background: #00BF6B;
+    font-size: 16px;
+    color: #ffffff;
+    border: none;
+    border-radius: 80px;
+    width: 100px;
+    height: 40px;
+}
+
+#table-buttons_se2:hover {
+    color: #ffffff;
+    background: #007F47;
+    font-size: 16px;
+    border: none;
+    border-radius: 80px;
+    width: 100px;
+    height: 40px;
+}
+
+input:focus{
+    outline: none;
+}

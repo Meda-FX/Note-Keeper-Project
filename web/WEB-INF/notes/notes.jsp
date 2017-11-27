@@ -8,7 +8,9 @@
         <c:set var="display" value = "${e:toUpperCase(name)}" />
         <hr>
         <h3>Notes</h3>
-
+        
+     <div class="row"><!-- row starts here -->
+    <div class="col-xm-12 col-md-8">
     <c:if test="${selectedNote != null}">
         <h3>Edit Note</h3>      
         <form action="notes" method="post">
@@ -44,15 +46,17 @@
                 <label for="dateCreated">Date Created:</label>
                 <input type="text" class="form-control" id="dateCreated" name="dateCreated" readonly>
             </div>
-            <input type="hidden" name="action" value="add">
-            <input type="submit" value="Save">
+            <input id="table-buttons_se" type="hidden" name="action" value="add">
+            <input id="table-buttons_se" type="submit" value="Save">
         </form>       
     </c:if>
+        </div>
+    </div> <!-- row finishes here -->
     </div> <!-- end of container 1 -->
     <div class="container-fluid ">
     <br>
     <p class="error">${message}</p>   
-    <table class="table table-hover">
+    <table class="table">
         <thead class="thead-dark">
         <tr>
             <th>Note Title</th>
@@ -70,16 +74,16 @@
                 <td>${note.dateCreated}</td>
                 <td>
                     <form action="notes" method="post" >
-                        <input type="submit" value="Delete">
-                        <input type="hidden" name="action" value="delete">
+                        <input id="table-buttons" type="submit" value="Delete">
+                        <input id="table-buttons" type="hidden" name="action" value="delete">
                         <input type="hidden" name="selectedId" value="${note.noteID}">
                     </form>
                 </td>
                 <!--This is to update the fields-->
                 <td>
                     <form action="notes" method="get">
-                        <input type="submit" value="Edit">
-                        <input type="hidden" name="action" value="view">
+                        <input id="table-buttons" type="submit" value="Edit">
+                        <input id="table-buttons" type="hidden" name="action" value="view">
                         <input type="hidden" name="selectedId" value="${note.noteID}">
                     </form>
                 </td>

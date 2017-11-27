@@ -1,7 +1,5 @@
-<%@ include file="/WEB-INF/includes/header.jsp" %>
-   
-       
-       
+<%@ include file="/WEB-INF/includes/header_no_nav.jsp" %>
+
          <form id="form-register"  action="register" method="post">
             <div class="form-header">
                  <h1>Registration</h1>             
@@ -21,7 +19,7 @@
             <div class="form-group">
                 <input type="text" class="form-control" id="lastname" name="lastname" placeholder="last name">
             </div>    
-             <div class="form-group">
+             <div class="form-group selectpicker">
                 <select id="company-select" name="company">
                     <option value="-1" ${selected}>Please select your company</option>
                     <c:forEach items="${companies}" var="company">
@@ -29,15 +27,14 @@
                     </c:forEach>
                   </select>
             </div>   
-            <input type="hidden" name="action" value="register">
-            <input class="login-button" type="submit" value="Register">
             <div>
                 <p class="error">${message}</p>   
             </div>
+            <input type="hidden" name="action" value="register">
+            <input class="login-button" type="submit" value="Register">
+            
         </form> 
-    <br>
-      
-    </div> <!-- End of Container one -->
-    
-     <br><br>
-    <%@ include file="/WEB-INF/includes/footer.jsp" %>
+    <br>  
+      </div>  <!--Container ends here -->
+    </body>
+</html>

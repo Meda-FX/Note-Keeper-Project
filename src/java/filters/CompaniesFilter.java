@@ -18,14 +18,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class AdminFilter implements Filter {
+public class CompaniesFilter implements Filter {
     
-    private FilterConfig filterConfig = null;      
-    
-    @Override
+    private FilterConfig filterConfig = null;
+   
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
-            throws IOException, ServletException {        
+            throws IOException, ServletException {
         
         User user = new User();
         UserService us = new UserService();
@@ -49,6 +48,8 @@ public class AdminFilter implements Filter {
         } catch (Exception ex) {
             Logger.getLogger(AdminFilter.class.getName()).log(Level.SEVERE, null, ex);
         }        
+        
+      
     }
 
     /**
@@ -61,6 +62,7 @@ public class AdminFilter implements Filter {
      * Init method for this filter
      */
     public void init(FilterConfig filterConfig) {        
-        this.filterConfig = filterConfig;        
+        this.filterConfig = filterConfig;
+        
     }    
 }

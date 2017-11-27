@@ -2,7 +2,7 @@
 
 <form id="form-login" action="login?action=login" method="post">
     <div class="form-header">
-        <h2 >NOTESKEEPR</h2>
+        <h2>NOTESKEEPR</h2>
     </div>
     <div class="form-group">
         <input type="text" class="form-control" name="username" value="${username}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">

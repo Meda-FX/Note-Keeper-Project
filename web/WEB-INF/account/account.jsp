@@ -7,10 +7,10 @@
     
         <d:set var="name" value = "${username}" />
         <d:set var="display" value = "${e:toUpperCase(name)}" />
-
-    <p class="error">${message}</p>     
+        
     <hr>
-
+    <div class="row"><!-- row starts here -->
+    <div class="col-xm-12 col-md-8">
     <h3>Edit Your Account Information</h3>
     
     <form action="account" method="post">
@@ -34,11 +34,13 @@
                 <label for="lastname"> Last Name: </label>
                 <input type="text" class="form-control" id="lastname" name="lastname" value="${selectedUser.lastname}">
             </div> 
-            <input type="hidden" name="action" value="edit">
-            <input type="submit" value="Save">
+          <p class="error">${message}</p>  
+            <input id="table-buttons_se" type="hidden" name="action" value="edit">
+            <input id="table-buttons_se" type="submit" value="Save">
         </form>  
     
-    
+    </div>
+    </div> <!-- row finishes here -->
     
 <!--    <form action="account" method="POST">
         User Name: <br> <input type="text" name="username" value="${selectedUser.username}" readonly><br>
@@ -49,11 +51,10 @@
         <input type="hidden" name="action" value="edit">
         <input type="submit" value="Save">
     </form>-->
-
     <br>
     </div> <!-- end of container 1 -->
     <div class="container-fluid">
-    <table class="table table-hover">
+    <table class="table">
         <thead class="thead-dark">
         <tr>
             <th>User Name</th>
@@ -79,8 +80,8 @@
 
                 <form action="account" method="post" >
                     <c:if test="${user.role.roleID != 1}">
-                        <input type="submit" value="Deactivate">
-                        <input type="hidden" name="action" value="deactivate">
+                        <input id="table-buttons" type="submit" value="Deactivate">
+                        <input id="table-buttons" type="hidden" name="action" value="deactivate">
                     </c:if>
                     <input type="hidden" name="selectedUser" value="${user.username}">
                 </form>
@@ -89,9 +90,8 @@
             <!--This is to update the fields-->
             <td>
                 <form action="account" method="get">
-                    <span class="icon-input-btn"><span class="glyphicon glyphicon-search"></span> <input type="submit" class="btn btn-default" value="Search"></span>
-                    <input type="submit" value="Edit">
-                    <input type="hidden" name="action" value="view">
+                    <input id="table-buttons" type="submit" value="Edit">
+                    <input id="table-buttons" type="hidden" name="action" value="view">
                     <input type="hidden" name="selectedUser" value="${user.username}">
                 </form>
             </td>

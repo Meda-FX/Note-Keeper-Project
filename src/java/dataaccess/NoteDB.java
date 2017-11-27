@@ -80,6 +80,20 @@ public class NoteDB {
             em.close();
         }
     }
+//    
+//    public Note getNoteByOwner(String owner) throws NotesDBException {
+//        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+//
+//        try {
+//            Note note = em.find(Note.class, noteId);
+//            return note;
+//        } catch (Exception ex) {
+//            Logger.getLogger(NoteDB.class.getName()).log(Level.SEVERE, "Cannot read notes", ex);
+//            throw new NotesDBException("Error getting Users");
+//        } finally {
+//            em.close();
+//        }
+//    }
 
     public int delete(Note note) throws NotesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

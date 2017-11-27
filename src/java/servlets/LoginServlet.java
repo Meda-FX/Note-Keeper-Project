@@ -58,8 +58,7 @@ public class LoginServlet extends HttpServlet {
         Company company = null;
         UserService us = new UserService();
         RoleService rs = new RoleService();
-        CompanyService cs = new CompanyService();
-        
+        CompanyService cs = new CompanyService();        
         
         if (action == null) {
             action = "";
@@ -85,26 +84,29 @@ public class LoginServlet extends HttpServlet {
                     getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                     return;
                 }
-
                 //case 2 username does not exists                
                 if (user.getPassword().equals(password)) {
+                    userComp = us.get(username);                        
+                    int compID = userComp.getCompany().getCompanyID();
+                    
                     if (user.getActive() == true) {
                         role = rs.get(1);
-                        if (user.getRole().getRoleID() == 1) {
+                        if (user.getRole().getRoleID() == 1) 
+                        {      
                             session.setAttribute("username", username);
                             session.setAttribute("user", user);
+                            session.setAttribute("compID", compID);
                             response.sendRedirect("admin");
-                        } else if (user.getRole().getRoleID() == 2){
+                        } else if (user.getRole().getRoleID() == 2)
+                        {
                             session.setAttribute("username", username);
                             session.setAttribute("user", user);
                             response.sendRedirect("notes");
                         } else
-                        {
-                            userComp = us.get(username);                        
-                            int compID = userComp.getCompany().getCompanyID();
-                            session.setAttribute("compID", compID);
+                        {                            
                             session.setAttribute("username", username);
-                            session.setAttribute("user", user);                         
+                            session.setAttribute("user", user);    
+                            session.setAttribute("compID", compID);
                             response.sendRedirect("companyadmin");
                         }
                       
