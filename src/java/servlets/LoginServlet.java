@@ -26,16 +26,15 @@ public class LoginServlet extends HttpServlet {
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
-
-        if (action == null) {
-            action = "";
-        }
-
-        if (action.equals("logout")) {
+        
+        if (action != null && action.equals("logout")) {
+            session.removeAttribute(username);
+            session.invalidate();
             request.setAttribute("message", "You've been logged out successfully.");
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+            return;
         }
-        else if(action.equals("register"))
+        else if(action != null && action.equals("register"))
         {
             getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
         }
@@ -43,7 +42,6 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
-    @SuppressWarnings("IncompatibleEquals")
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 

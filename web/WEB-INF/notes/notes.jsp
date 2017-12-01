@@ -15,12 +15,16 @@
         <h3>Edit Note</h3>      
         <form action="notes" method="post">
             <div class="form-group">
+                <label for="noteid"> Note ID:</label>
+                <input type="text" class="form-control" id="noteid" name="noteid" value="${selectedNote.noteID}" readonly >
+            </div>
+            <div class="form-group">
                 <label for="title"> Title</label>
-                <input type="text" class="form-control" id="title" name="title" value="${selectedNote.title}"  >
+                <input type="text" class="form-control" id="title" name="title" value="${selectedNote.title}" >
             </div>
             <div class="form-group">
                 <label for="content">Contents:</label>
-                <input type="text" class="form-control" id="content" name="contents" value="${selectedNote.contents}">
+                <input type="text" class="form-control" id="content" name="contents" value="${selectedNote.contents}" >
             </div>
             <div class="form-group">
                 <label for="dateCreated">Date Created:</label>
@@ -35,8 +39,12 @@
         <h3>Add Note</h3>        
            <form action="notes" method="post">
             <div class="form-group">
+                <label for="noteid">Note ID:</label>
+                <input type="text" class="form-control" id="noteid" name="noteid" >
+            </div>
+            <div class="form-group">
                 <label for="title"> Title:</label>
-                <input type="text" class="form-control" id="noteid" name="title" >
+                <input type="text" class="form-control" id="title" name="title" >
             </div>
             <div class="form-group">
                 <label for="content">Contents:</label>

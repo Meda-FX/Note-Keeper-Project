@@ -51,35 +51,34 @@ public class NotesServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String action = request.getParameter("action");
-
-        String accountHolder;
         HttpSession session = request.getSession();
-        accountHolder = (String) session.getAttribute("username");
-
-        if (action == null) {
-            action = "";
-        }
+        String accountHolder = (String) session.getAttribute("username");
+       
         Note note = null;
         NoteService ns = new NoteService();
         try {
-            if (action.equals("delete")) {
+            if (action != null && action.equals("delete")) {
                 int selectedId = Integer.parseInt(request.getParameter("selectedId"));
                 note = ns.get(selectedId);
                 if (!note.getOwner().getUsername().equals(accountHolder)) {
-                    request.setAttribute("message", "you can only delete your note.");
+                    request.setAttribute("message", "Sorry. You can only delete your note.");
                     doGet(request, response);
                     return;
-                } else {
-                    ns.delete(selectedId);
-                    request.setAttribute("message", "Note deleted successfully.");
-                    doGet(request, response);
+                } 
+                else {
+                        if(note.getNoteID() == selectedId)
+                        {
+                            ns.delete(selectedId);
+                            request.setAttribute("message", "Note deleted successfully.");
+                            doGet(request, response);
+                        }
                 }
-            } else if (action.equals("edit")) {
+            } else if (action != null && action.equals("edit")) {
                 int noteId = Integer.parseInt(request.getParameter("noteid"));
                 String contents = request.getParameter("contents");
                 String title = request.getParameter("title");
                 ns.update(noteId, contents, title);
-            } else if (action.equals("add")) {
+            } else if (action != null && action.equals("add")) {
                 String contents = request.getParameter("contents");
                 String title = request.getParameter("title");
                 if (contents.trim().isEmpty() || contents == null || title.trim().isEmpty()) {
@@ -102,7 +101,6 @@ public class NotesServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(NotesServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         request.setAttribute("notes", notes);
         getServletContext().getRequestDispatcher("/WEB-INF/notes/notes.jsp").forward(request, response);
     }

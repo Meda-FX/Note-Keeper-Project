@@ -46,7 +46,7 @@ public class CompaniesFilter implements Filter {
                 ((HttpServletResponse)response).sendRedirect("notes");
             }
         } catch (Exception ex) {
-            Logger.getLogger(AdminFilter.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CompaniesFilter.class.getName()).log(Level.SEVERE, null, ex);
         }        
         
       

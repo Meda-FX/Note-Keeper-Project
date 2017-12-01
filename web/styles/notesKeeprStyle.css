@@ -114,7 +114,12 @@ hr{
  
 }
 #login-footer-link:hover{
-    color: #ffffff;
+    color: #ffffff;    
+}
+
+#regis-reset_login {
+   padding-left: 40px;
+   padding-right: 40px; 
 }
 
 /** register page**/

@@ -21,6 +21,8 @@ public class AccountServlet extends HttpServlet {
 
         UserService us = new UserService();
         String action = request.getParameter("action");
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("username");
 
         if (action != null && action.equals("view")) {
             String selectedUser = request.getParameter("selectedUser");
@@ -34,7 +36,7 @@ public class AccountServlet extends HttpServlet {
 
         User user = null;
         String accountHolder;
-        HttpSession session = request.getSession();
+        
         accountHolder = (String) session.getAttribute("username");
 
         try {
@@ -55,20 +57,16 @@ public class AccountServlet extends HttpServlet {
         User user;
         String accountHolder = (String) session.getAttribute("username");
 
-        if (action == null) {
-            action = "";
-        }
-
         UserService us = new UserService();
         try {
-            if (action.equals("deactivate")) {
+            if (action != null && action.equals("deactivate")) {
                 user = us.get(accountHolder);
                 user.setActive(false);
                 String selectedUser = request.getParameter("selectedUser");
                 session.removeAttribute("username");
                 us.logicallyDelete(selectedUser, false);
                 getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-            } else if (action.equals("edit")) {
+            } else if (action != null && action.equals("edit")) {
                 String username = request.getParameter("username");
                 String password = request.getParameter("password");
                 String email = request.getParameter("email");

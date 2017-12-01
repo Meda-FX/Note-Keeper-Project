@@ -18,8 +18,9 @@
     </div>
     <hr>
     <label>
-        <p>
-        <a id="login-footer-link" href="register?action=register">New user Register</a>
+        <p id="regis-reset_login">
+        <a id="login-footer-link" href="register?action=register">New user Register</a> | 
+        <a id="login-footer-link" href="#">Reset Password</a>
         </p>
     </label>
 </form>  

@@ -62,7 +62,8 @@ public class SystemAdminServlet extends HttpServlet {
         String lastname = request.getParameter("lastname");
         String status = request.getParameter("active");
         boolean activation = false;
-        if(status.equals("true"))
+        
+        if(status != null && status.equals("true"))
         {
             activation = true;
         }
@@ -70,28 +71,24 @@ public class SystemAdminServlet extends HttpServlet {
         {
             activation = false;
         }
-            
-        if (action == null) {
-            action = "";
-        }
 
         UserService us = new UserService();
         try {
-            if (action.equals("delete")) {
+            if (action != null && action.equals("delete")) {
                 user = us.get(selectedUser);
                 if (user.getUsername().equals(accountHolder)) {
                     request.setAttribute("message", "You cannot delete yourself.");
                     doGet(request, response);
                 } else {                    
-                    us.delete(selectedUser);
                     request.setAttribute("message", "Deleted Successfuly.");
+                    us.delete(selectedUser);
                     doGet(request, response);
                 }
-            } else if (action.equals("edit")) {
+            } else if (action != null && action.equals("edit")) {
                 us.update(username, email, password, firstname, lastname, activation);
                 doGet(request, response);
 
-            } else if (action.equals("add")) {
+            } else if (action != null && action.equals("add")) {
                 if (username.trim().isEmpty() || password.trim().isEmpty() || email.trim().isEmpty()
                         || firstname.trim().isEmpty() || lastname.trim().isEmpty()) {
                     request.setAttribute("message", "Please fill in the form.");

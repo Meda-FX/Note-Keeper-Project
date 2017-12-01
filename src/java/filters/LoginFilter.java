@@ -1,7 +1,6 @@
 package filters;
 
 import businesslogic.UserService;
-import domainmodel.User;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -18,38 +17,37 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class CompanyAdminFilter implements Filter {    
+/**
+ *
+ * @author 608964
+ */
+public class LoginFilter implements Filter {    
    
-    private FilterConfig filterConfig = null;    
-    
+    private FilterConfig filterConfig = null;
+ 
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
-            throws IOException, ServletException {
+            throws IOException, ServletException {     
         
-        User user = new User();
         UserService us = new UserService();
         HttpSession session = ((HttpServletRequest)request).getSession();
         String username = (String) session.getAttribute("username");
         
         try {
-            user = us.get(username);
-            if(user.getRole().getRoleID() == 1 || user.getRole().getRoleID() == 3)
-            {
-                chain.doFilter(request, response);
-            }
-            else
-            {
-                ((HttpServletResponse)response).sendRedirect("notes");
-            }
+        if(username != null)
+        {
+             chain.doFilter(request, response);
+        }
+        else
+        {
+            ((HttpServletResponse)response).sendRedirect("login");
+        }
         } catch (Exception ex) {
-            Logger.getLogger(CompanyAdminFilter.class.getName()).log(Level.SEVERE, null, ex);
-        }        
-       
+            Logger.getLogger(LoginFilter.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+        
     }
-
-    /**
-     * Destroy method for this filter
-     */
+ 
     public void destroy() {        
     }
 
@@ -57,7 +55,7 @@ public class CompanyAdminFilter implements Filter {
      * Init method for this filter
      */
     public void init(FilterConfig filterConfig) {        
-        this.filterConfig = filterConfig;       
-    }
-    
+        this.filterConfig = filterConfig;
+        
+    }    
 }

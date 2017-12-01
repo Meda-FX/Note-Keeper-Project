@@ -40,10 +40,6 @@ public class AdminFilter implements Filter {
             }
             else
             {
-                if(user.getRole().getRoleID() == 3)
-                {
-                     ((HttpServletResponse)response).sendRedirect("companyadmin");
-                }                
                 ((HttpServletResponse)response).sendRedirect("notes");
             }
         } catch (Exception ex) {
