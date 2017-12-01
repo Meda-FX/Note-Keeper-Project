@@ -1,4 +1,5 @@
 <%@ include file="/WEB-INF/includes/header.jsp" %>
+<br>
    <div class="row">
         <div class="col-md-9"><h1>Company Admin - Manage Users</h1></div>
         <div class="col-md-3"><h3>Welcome ${display}</h3></div>
@@ -7,7 +8,15 @@
         <div class="row"><!-- row starts here -->
     <div class="col-xm-12 col-md-8">
     <c:if test="${selectedUser != null}">
-        <h3>Edit User</h3>        
+        <div class="row"><!-- row starts here -->
+            <div class="col-xm-12 col-md-4">
+             <h3>Edit User</h3> 
+            </div>
+            <div class="col-xm-12 col-md-4">
+            <h3><a href="CompanyRoleManager">Manage Roles</a> </h3>    
+            </div>
+        </div>
+            
         <form action="companyadmin" method="post">
             <div class="form-group">
                 <label for="username"> User Name:</label>
@@ -39,7 +48,14 @@
     </c:if>
 
     <c:if test="${selectedUser == null}">
-        <h3>Add User</h3>        
+        <div class="row"><!-- row starts here -->
+            <div class="col-xm-12 col-md-4">
+             <h3>Add User</h3> 
+            </div>
+            <div class="col-xm-12 col-md-4">
+            <h3><a href="CompanyRoleManager">Manage Roles</a> </h3>    
+            </div>
+        </div>      
          <form action="companyadmin" method="post">
             <div class="form-group">
                 <label for="username"> User Name:</label>

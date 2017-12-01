@@ -50,6 +50,16 @@ public class UserService {
         return userDB.update(user);
     }
     
+     public int update(String username, int roleid) throws Exception {
+       
+        User user = userDB.getUser(username);  
+        Role role = null;
+        RoleService rs = new RoleService();
+        role = rs.get(roleid);        
+        user.setRole(role);
+        return userDB.update(user);
+    }
+     
     public int delete(String username) throws Exception {
         User deleteUser = userDB.getUser(username);
         return userDB.delete(deleteUser);

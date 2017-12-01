@@ -48,25 +48,21 @@ public class CompanyMangerServlet extends HttpServlet {
             throws ServletException, IOException {
         
         String action = request.getParameter("action");
-        if(action == null)
-        {
-            action = "";
-        }
-        
+       
         CompanyService cs = new CompanyService();
         try {
-            if(action.equals("delete"))
+            if(action != null && action.equals("delete"))
             {
                 int selectedID = Integer.parseInt(request.getParameter("selectedID"));
                 cs.delete(selectedID);
             }
-            else if(action.equals("edit"))
+            else if(action != null && action.equals("edit"))
             {
                 int companyID = Integer.parseInt(request.getParameter("companyID"));
                 String companyName = request.getParameter("companyName");
                 cs.update(companyID, companyName);
             }
-            else if (action.equals("add"))
+            else if (action != null && action.equals("add"))
             {
                 String companyName = request.getParameter("companyName");
                 cs.insert(companyName);
@@ -75,8 +71,7 @@ public class CompanyMangerServlet extends HttpServlet {
                request.setAttribute("message", "Whoops. Could not perform that action.");
            }
         
-        List<Company> companies = null;
-        
+        List<Company> companies = null;        
         try {
             companies = (List<Company>) cs.getAll();
         } catch (Exception ex) {

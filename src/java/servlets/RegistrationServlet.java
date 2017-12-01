@@ -50,12 +50,8 @@ public class RegistrationServlet extends HttpServlet {
         int compId = Integer.parseInt(selectedCompany);
         
         UserService us = new UserService();
-        
-        if (action == null) {
-            action = "";
-        }
-        
-        if (action.equals("register")) 
+       
+        if (action != null && action.equals("register")) 
         {
             if (username.trim().isEmpty() || password.trim().isEmpty() || email.trim().isEmpty()
                     || firstname.trim().isEmpty() || lastname.trim().isEmpty() || selectedCompany.isEmpty()) {

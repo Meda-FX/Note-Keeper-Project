@@ -2,13 +2,20 @@
   <br>
     <div class="row">
         <div class="col-md-9"><h1>System Admin - Manage Users</h1></div>
-        <div class="col-md-3"><h3>Welcome ${display}</h3></div>
+        <div class="col-md-3"><h3>Welcome ${display}</h3></div>       
     </div>
     <hr>    
     <div class="row"><!-- row starts here -->
     <div class="col-xm-12 col-md-8">
     <c:if test="${selectedUser != null}">
-        <h3>Edit User</h3>        
+        <div class="row"><!-- row starts here -->
+            <div class="col-xm-12 col-md-4">
+             <h3>Edit User</h3> 
+            </div>
+            <div class="col-xm-12 col-md-4">
+            <h3><a href="systemrole">Manage Roles</a> </h3>    
+            </div>
+        </div>
         <form action="admin" method="post">
             <div class="form-group">
                 <label for="username"> User Name:</label>
@@ -39,9 +46,16 @@
             <input id="table-buttons_se" type="submit" value="Save">
         </form>  
     </c:if>
-
+         
     <c:if test="${selectedUser == null}">
-        <h3>Add User</h3>
+       <div class="row"><!-- row starts here -->
+            <div class="col-xm-4 col-md-8">
+             <h3>Add User</h3> 
+            </div>
+            <div class="col-xm-4 col-md-4">
+            <h5><a href="systemrole">Manage Roles</a> </h5>    
+            </div>
+        </div>
         
          <form action="admin" method="post">
             <div class="form-group">

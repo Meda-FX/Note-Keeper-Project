@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    
     <filter>
         <filter-name>LoginFilter</filter-name>
         <filter-class>filters.LoginFilter</filter-class>
     </filter>
-     <filter>
+    <filter>
         <filter-name>AdminFilter</filter-name>
         <filter-class>filters.AdminFilter</filter-class>
     </filter>
@@ -16,8 +15,8 @@
     <filter>
         <filter-name>CompaniesFilter</filter-name>
         <filter-class>filters.CompaniesFilter</filter-class>
-    </filter>   
-   <filter-mapping>
+    </filter>
+    <filter-mapping>
         <filter-name>LoginFilter</filter-name>
         <servlet-name>AdminServlet</servlet-name>
         <servlet-name>AccountServlet</servlet-name>
@@ -25,7 +24,7 @@
         <servlet-name>CompanyAdminServlet</servlet-name>
         <servlet-name>CompanyMangerServlet</servlet-name>
     </filter-mapping>
-     <filter-mapping>
+    <filter-mapping>
         <filter-name>AdminFilter</filter-name>
         <servlet-name>AdminServlet</servlet-name>
     </filter-mapping>
@@ -65,6 +64,14 @@
         <servlet-name>RegistrationServlet</servlet-name>
         <servlet-class>servlets.RegistrationServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RoleManagerServlet</servlet-name>
+        <servlet-class>servlets.RoleManagerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CompanyRoleManager</servlet-name>
+        <servlet-class>servlets.CompanyRoleManager</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NoteServlets</servlet-name>
         <url-pattern>/notes</url-pattern>
@@ -96,6 +103,14 @@
     <servlet-mapping>
         <servlet-name>RegistrationServlet</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RoleManagerServlet</servlet-name>
+        <url-pattern>/systemrole</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CompanyRoleManager</servlet-name>
+        <url-pattern>/CompanyRoleManager</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout> 30 </session-timeout>

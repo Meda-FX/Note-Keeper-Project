@@ -1,14 +1,14 @@
 <%@ include file="/WEB-INF/includes/header.jsp" %>
   <br>
     <div class="row">
-        <div class="col-md-9"><h1>System Admin - Role Manager</h1></div>
+        <div class="col-md-9"><h1>Company Admin - Role Manager</h1></div>
         <div class="col-md-3"><h3>Welcome ${display}</h3></div>
     </div>
     <hr>    
     <div class="row"><!-- row starts here -->
     <div class="col-xm-12 col-md-8">
         <h3>Edit User</h3>        
-        <form action="systemrole" method="post">
+        <form action="CompanyRoleManager" method="post">
             <div class="form-group">
                 <label for="username"> User Name:</label>
                 <input type="text" class="form-control" id="username" name="username" value="${selectedUser.username}" readonly>
@@ -29,7 +29,7 @@
                 <label for="role-select">Choose Users Role:</label>
                 <select id="role-select" name="userRoles">
                     <option value="-1" ${selected}>Please select roles</option>
-                    <c:forEach items="${roles}" var="role">
+                    <c:forEach items="${roles}" var="role" begin="1">
                       <option value="${role.roleID}" ${selected}>${role.roleName}</option>
                     </c:forEach>
                   </select>
@@ -64,6 +64,7 @@
         </thead>
         <br>
         <c:forEach var="user" items="${users}">
+           <c:if test = "${user.company.companyID == compID}">
             <tr>
                 <td>${user.username}</td>
                 <td>${user.password}</td>
@@ -74,7 +75,7 @@
                 <td>${user.role.roleName}</td>
                 <td>${user.company.companyName}</td>
                 <td>
-                    <form action="systemrole" method="post" >
+                    <form action="CompanyRoleManager" method="post" >
                         <input id="table-buttons" type="submit" value="Delete">
                         <input id="table-buttons" type="hidden" name="action" value="delete">
                         <input type="hidden" name="selectedUser" value="${user.username}">
@@ -82,13 +83,14 @@
                 </td>
                 <!--This is to update the fields-->
                 <td>
-                    <form action="systemrole" method="get">
+                    <form action="CompanyRoleManager" method="get">
                         <input id="table-buttons" type="submit" value="Edit">
                         <input id="table-buttons" type="hidden" name="action" value="view">
                         <input type="hidden" name="selectedUser" value="${user.username}">
                     </form>
                 </td>
             </tr>
+            </c:if>
         </c:forEach>
     </table>
 </div>

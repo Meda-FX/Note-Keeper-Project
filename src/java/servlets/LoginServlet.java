@@ -99,6 +99,7 @@ public class LoginServlet extends HttpServlet {
                         {
                             session.setAttribute("username", username);
                             session.setAttribute("user", user);
+                            session.setAttribute("compID", compID);
                             response.sendRedirect("notes");
                         } else
                         {                            
