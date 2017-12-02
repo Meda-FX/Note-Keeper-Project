@@ -26,6 +26,14 @@ public class UserService {
         return userDB.getAll();
     }
     
+    public User getByUUID(String uuid) throws Exception {
+        return userDB.getByUUID(uuid);
+    }
+    
+    public User getUserByEmail(String email) throws Exception {
+        return userDB.getUserByEmail(email);
+    }
+    
     public int update(String username, String email, String password, String firstname, String lastname, boolean activation) throws Exception {
        
         User user = userDB.getUser(username);
@@ -60,6 +68,11 @@ public class UserService {
         RoleService rs = new RoleService();
         role = rs.get(roleid);        
         user.setRole(role);
+        return userDB.update(user);
+    }
+     
+    public int update(User user) throws Exception 
+    {
         return userDB.update(user);
     }
      

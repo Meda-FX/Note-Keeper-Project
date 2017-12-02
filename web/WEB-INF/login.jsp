@@ -20,7 +20,7 @@
     <label>
         <p id="regis-reset_login">
         <a id="login-footer-link" href="register?action=register">New user Register</a> | 
-        <a id="login-footer-link" href="#">Reset Password</a>
+        <a id="login-footer-link" href="reset">Reset Password</a>
         </p>
     </label>
 </form>  

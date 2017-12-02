@@ -40,7 +40,7 @@
            <form action="notes" method="post">
             <div class="form-group">
                 <label for="noteid">Note ID:</label>
-                <input type="text" class="form-control" id="noteid" name="noteid" >
+                <input type="text" class="form-control" id="noteid" name="noteid" readonly>
             </div>
             <div class="form-group">
                 <label for="title"> Title:</label>

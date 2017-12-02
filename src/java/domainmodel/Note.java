@@ -71,7 +71,7 @@ public class Note implements Serializable {
         this.contents = contents;
     }
     
-     public Note(Integer noteID, Date dateCreated, String title, String contents, User owner) {
+    public Note(Integer noteID, Date dateCreated, String title, String contents, User owner) {
         this.noteID = noteID;
         this.dateCreated = dateCreated;
         this.title = title;

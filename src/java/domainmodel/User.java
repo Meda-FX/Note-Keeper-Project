@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")
     , @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active")
     , @NamedQuery(name = "User.findByFirstname", query = "SELECT u FROM User u WHERE u.firstname = :firstname")
-    , @NamedQuery(name = "User.findByLastname", query = "SELECT u FROM User u WHERE u.lastname = :lastname")})
+    , @NamedQuery(name = "User.findByLastname", query = "SELECT u FROM User u WHERE u.lastname = :lastname")
+    , @NamedQuery(name = "User.findByResetPasswordUUID", query = "SELECT u FROM User u WHERE u.resetPasswordUUID = :resetPasswordUUID")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -58,6 +59,8 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "Lastname")
     private String lastname;
+    @Column(name = "ResetPasswordUUID")
+    private String resetPasswordUUID;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private Collection<Note> noteCollection;
     @JoinColumn(name = "Company", referencedColumnName = "CompanyID")
@@ -83,30 +86,7 @@ public class User implements Serializable {
         this.lastname = lastname;
     }
     
-    public User(String username, String password, String email, boolean active, String firstname, 
-            String lastname, Role role, Company company) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.active = active;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.role = role;
-        this.company = company;
-    }
-    
-     public User(String username, String password, String email, boolean active, String firstname, 
-            String lastname, int companyid) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.active = active;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.role = role;
-    }
-    
-     public User(String username, String password, String firstname, String lastname, String email) {
+    public User(String username, String password, String email, String firstname, String lastname) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -160,6 +140,14 @@ public class User implements Serializable {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public String getResetPasswordUUID() {
+        return resetPasswordUUID;
+    }
+
+    public void setResetPasswordUUID(String resetPasswordUUID) {
+        this.resetPasswordUUID = resetPasswordUUID;
     }
 
     @XmlTransient

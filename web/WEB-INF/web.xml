@@ -23,12 +23,12 @@
         <servlet-name>NoteServlets</servlet-name>
         <servlet-name>CompanyAdminServlet</servlet-name>
         <servlet-name>CompanyMangerServlet</servlet-name>
-         <servlet-name>RoleManagerServlet</servlet-name>
-          <servlet-name>CompanyRoleManager</servlet-name>
+        <servlet-name>RoleManagerServlet</servlet-name>
+        <servlet-name>CompanyRoleManager</servlet-name>
     </filter-mapping>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
-        <servlet-name>AdminServlet</servlet-name>        
+        <servlet-name>AdminServlet</servlet-name>
         <servlet-name>RoleManagerServlet</servlet-name>
     </filter-mapping>
     <filter-mapping>
@@ -76,6 +76,10 @@
         <servlet-name>CompanyRoleManager</servlet-name>
         <servlet-class>servlets.CompanyRoleManager</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ResetPasswordServlet</servlet-name>
+        <servlet-class>servlets.ResetPasswordServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NoteServlets</servlet-name>
         <url-pattern>/notes</url-pattern>
@@ -116,10 +120,15 @@
         <servlet-name>CompanyRoleManager</servlet-name>
         <url-pattern>/CompanyRoleManager</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordServlet</servlet-name>
+        <url-pattern>/reset</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout> 30 </session-timeout>
     </session-config>
     <welcome-file-list>
         <welcome-file>login</welcome-file>
     </welcome-file-list>
+    
 </web-app>
