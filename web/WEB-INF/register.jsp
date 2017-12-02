@@ -33,6 +33,7 @@
             <input type="hidden" name="action" value="register">
             <input class="login-button" type="submit" value="Register">
             
+            <p><a id="login-footer-link" href="login">&LT;GO BACK</a></p>
         </form> 
     <br>  
       </div>  <!--Container ends here -->

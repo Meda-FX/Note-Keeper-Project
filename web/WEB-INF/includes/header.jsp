@@ -24,31 +24,30 @@
     <body>       
 
 <nav id="note-nav" class="navbar navbar-expand-md navbar-dark fixed-top">
-      <a class="navbar-brand" href="#">Noteskeepr</a>
+      <a class="navbar-brand" href="#">NOTESKEEPR</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto">            
           <li class="nav-item">
-            <a id="nav-link-text" class="nav-link" href="account">Account</a>
+            <a id="nav-link-text" class="nav-link" href="account">ACCOUNT</a>
           </li>
           <li class="nav-item">
-            <a  id="nav-link-text" class="nav-link" href="notes">Notes</a>
+            <a  id="nav-link-text" class="nav-link" href="notes">NOTES</a>
           </li>
           <li class="nav-item">
-            <a  id="nav-link-text" class="nav-link" href="admin">System Administrators</a>
+            <a  id="nav-link-text" class="nav-link" href="admin">SYSTEM ADMIN</a>
           </li>
           <li class="nav-item">
-            <a id="nav-link-text" class="nav-link" href="companyadmin">Company Administrators</a>
+            <a id="nav-link-text" class="nav-link" href="companyadmin">COMPANY ADMIN</a>
           </li>
           <li class="nav-item">
-            <a id="nav-link-text" class="nav-link" href="managecompanies">Companies</a>
+            <a id="nav-link-text" class="nav-link" href="managecompanies">COMPANIES</a>
           </li>
           <li class="nav-item">
-            <a id="nav-link-text" class="nav-link" href="login?action=logout">Logout</a>
-          </li>      
+            <a id="nav-link-text" class="nav-link" href="login?action=logout">LOGOUT</a>
+          </li> 
         </ul>
           
         <!--If I use it for search-->
@@ -63,8 +62,9 @@
         
         
       </div>
+          
     </nav>
-
+          <br>
         
         <div class="container">
   <!-- Content here -->

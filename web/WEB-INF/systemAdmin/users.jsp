@@ -8,14 +8,14 @@
     <div class="row"><!-- row starts here -->
     <div class="col-xm-12 col-md-8">
     <c:if test="${selectedUser != null}">
-        <div class="row"><!-- row starts here -->
-            <div class="col-xm-12 col-md-4">
+         <div class="row"><!-- row starts here -->
+            <div class="col-xm-12 col-md-8">
              <h3>Edit User</h3> 
             </div>
             <div class="col-xm-12 col-md-4">
-            <h3><a href="systemrole">Manage Roles</a> </h3>    
+                <button type="button" id="table-buttons3"><a href="CompanyRoleManager">Manage Roles</a></button>
             </div>
-        </div>
+        </div>      
         <form action="admin" method="post">
             <div class="form-group">
                 <label for="username"> User Name:</label>
@@ -30,8 +30,9 @@
                 <input type="email" class="form-control" id="email" name="email" value="${selectedUser.email}">
             </div>
             <div class="form-group">
-                <label for="active"> Active: </label>
-                <input type="text" class="form-control" id="active" name="active" value="${selectedUser.active}">
+                <label for="active"> Activate User:   </label>
+                <input type="radio" name="active" value="true" CHECKED> True
+                <input type="radio" name="active" value="false"> False
             </div>
             <div class="form-group">
                 <label for="firstname"> First Name: </label>
@@ -49,13 +50,13 @@
          
     <c:if test="${selectedUser == null}">
        <div class="row"><!-- row starts here -->
-            <div class="col-xm-4 col-md-8">
+            <div class="col-xm-12 col-md-8">
              <h3>Add User</h3> 
             </div>
-            <div class="col-xm-4 col-md-4">
-            <h5><a href="systemrole">Manage Roles</a> </h5>    
+            <div class="col-xm-12 col-md-4">
+                <button type="button" id="table-buttons3"><a href="CompanyRoleManager">Manage Roles</a></button>
             </div>
-        </div>
+        </div>      
         
          <form action="admin" method="post">
             <div class="form-group">
@@ -70,9 +71,10 @@
                 <label for="email"> Email:</label>
                 <input type="email" class="form-control" id="email" name="email" >
             </div>
-            <div class="form-group">
-                <label for="active"> Active: </label>
-                <input type="text" class="form-control" id="active" name="active">
+           <div class="form-group">
+                <label for="active"> Activate User:   </label>
+                <input type="radio" name="active" value="true" CHECKED> True
+                <input type="radio" name="active" value="false"> False
             </div>
             <div class="form-group">
                 <label for="firstname"> First Name: </label>

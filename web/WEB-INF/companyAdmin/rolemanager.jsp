@@ -7,7 +7,7 @@
     <hr>    
     <div class="row"><!-- row starts here -->
     <div class="col-xm-12 col-md-8">
-        <h3>Edit User</h3>        
+        <h3>Edit Role</h3>        
         <form action="CompanyRoleManager" method="post">
             <div class="form-group">
                 <label for="username"> User Name:</label>

@@ -152,6 +152,25 @@ hr{
     width: 100%;
     height: auto;
 }
+button a {
+    color: #ffffff;
+    text-decoration: none;
+    
+}
+button a:hover {
+    color: #303138;
+    text-decoration: none;
+    
+}
+button {
+    background: #00BF6B;
+    font-size: 16px;
+    color: #ffffff;
+    border: none;
+    border-radius: 80px;
+    width: 60%;
+    height: 35px;
+}
 
 #table-buttons:hover{
     color: #ffffff;

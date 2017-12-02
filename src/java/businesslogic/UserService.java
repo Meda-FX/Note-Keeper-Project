@@ -1,11 +1,14 @@
 
 package businesslogic;
 
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import dataaccess.UserDB;
 import domainmodel.Company;
 import domainmodel.Role;
 import domainmodel.User;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class UserService {
     
@@ -75,18 +78,13 @@ public class UserService {
     }
     
     public int insert(String username, String password, String email, boolean active, String firstname, 
-            String lastname) throws Exception {
+            String lastname, int companyid) throws Exception {        
         
         User user = new User(username, password, email, active, firstname, lastname);
         Role role = new Role(2);  // default regular user role
-        user.setRole(role);
-        Company comp = new Company(3); //belongs to little pony company by default
+        user.setRole(role);  
+        Company comp = new Company(companyid); //belongs to little pony company by default
         user.setCompany(comp);
-//        RoleService rs = new RoleService();
-//        role = rs.get(2);        
-        
-        //User user = new User(username, password, email, active, firstname, lastname, role, comp);
-        //User user = new User(username, password, email, active, firstname, lastname);
         return  userDB.insert(user);
     }
     

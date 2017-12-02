@@ -74,25 +74,30 @@ public class CompanyAdminServlet extends HttpServlet {
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
         String status = request.getParameter("active");
-        boolean activation;
+        boolean activation = true;
         
-        if (action == null) {
-            action = "";
-        }
+        if(status != null) {
+            if(status.equals("true")) {
+                activation = true;
+            }
+            else if (status.equals("false")){
+                activation = false;
+            }
+        }     
         
-        if(status != null && status.equals("true"))
-        {
-            activation = true;
-        }
-        else
-        {
-            activation = false;
-        }
+//        if(status != null && status.equals("true"))
+//        {
+//            activation = true;
+//        }
+//        else
+//        {
+//            activation = false;
+//        }
 
         UserService us = new UserService();
         //CompanyService cs = new CompanyService();
         try {
-            if (action.equals("delete")) {
+            if (action != null && action.equals("delete")) {
                 user = us.get(selectedUser);
                 if (user.getUsername().equals(accountHolder)) {
                     request.setAttribute("message", "You cannot delete yourself.");
@@ -102,12 +107,12 @@ public class CompanyAdminServlet extends HttpServlet {
                     request.setAttribute("message", "Deleted Successfuly.");
                     doGet(request, response);
                 }
-            } else if (action.equals("edit")) {
+            } else if (action != null && action.equals("edit")) {
                 
                 us.update(username, email, password, firstname, lastname, activation);
                 doGet(request, response);
 
-            } else if (action.equals("add")) {
+            } else if (action != null && action.equals("add")) {
                 if (username.trim().isEmpty() || password.trim().isEmpty() || email.trim().isEmpty()
                         || firstname.trim().isEmpty() || lastname.trim().isEmpty()) {
                     request.setAttribute("message", "Please fill in the form.");
@@ -115,8 +120,7 @@ public class CompanyAdminServlet extends HttpServlet {
                     return;
                 }
                 
-                us.insert(username, password, email, true, firstname, lastname);
-                //us.insert(username, password, email, true, firstname, lastname, compId);
+                us.insert(username, password, email, activation, firstname, lastname, compId);
                 doGet(request, response);
             }
         } catch (Exception ex) {

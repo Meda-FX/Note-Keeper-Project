@@ -54,23 +54,33 @@ public class SystemAdminServlet extends HttpServlet {
         User user;
         String accountHolder = (String) session.getAttribute("username");
         String selectedUser = request.getParameter("selectedUser");
-
+        int compId = (int) session.getAttribute("compID");
+        
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
         String status = request.getParameter("active");
-        boolean activation = false;
+        boolean activation = true;        
+//        if(status != null && status.equals("true"))
+//        {
+//            activation = true;
+//        }
+//        else
+//        {
+//            activation = false;
+//        }
         
-        if(status != null && status.equals("true"))
-        {
-            activation = true;
-        }
-        else
-        {
-            activation = false;
-        }
+        if(status != null) {
+            if(status.equals("true")) {
+                activation = true;
+            }
+            else if (status.equals("false")){
+                activation = false;
+            }
+        }     
+        
 
         UserService us = new UserService();
         try {
@@ -95,7 +105,7 @@ public class SystemAdminServlet extends HttpServlet {
                     doGet(request, response);
                     return;
                 }
-                us.insert(username, password, email, true, firstname, lastname);
+                us.insert(username, password, email, activation, firstname, lastname, compId);
                 doGet(request, response);
             }            
         } catch (Exception ex) {

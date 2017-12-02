@@ -23,14 +23,18 @@
         <servlet-name>NoteServlets</servlet-name>
         <servlet-name>CompanyAdminServlet</servlet-name>
         <servlet-name>CompanyMangerServlet</servlet-name>
+         <servlet-name>RoleManagerServlet</servlet-name>
+          <servlet-name>CompanyRoleManager</servlet-name>
     </filter-mapping>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
-        <servlet-name>AdminServlet</servlet-name>
+        <servlet-name>AdminServlet</servlet-name>        
+        <servlet-name>RoleManagerServlet</servlet-name>
     </filter-mapping>
     <filter-mapping>
         <filter-name>CompanyAdminFilter</filter-name>
         <servlet-name>CompanyAdminServlet</servlet-name>
+        <servlet-name>CompanyRoleManager</servlet-name>
     </filter-mapping>
     <filter-mapping>
         <filter-name>CompaniesFilter</filter-name>

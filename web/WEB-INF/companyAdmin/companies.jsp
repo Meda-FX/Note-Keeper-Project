@@ -1,5 +1,6 @@
 <%@ include file="/WEB-INF/includes/header.jsp" %>
-   <div class="row">
+<br>  
+<div class="row">
         <div class="col-md-9"><h1>System Admin - Manage Companies</h1></div>
         <div class="col-md-3"><h3>Welcome ${display}</h3></div>
     </div>

@@ -44,8 +44,7 @@ public class LoginFilter implements Filter {
         }
         } catch (Exception ex) {
             Logger.getLogger(LoginFilter.class.getName()).log(Level.SEVERE, null, ex);
-        }  
-        
+        }          
     }
  
     public void destroy() {        
