@@ -1,17 +1,19 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>New Password</title>
-    </head>
-    <body>
-        <h1>Enter New Password</h1>
-         <form action="reset?action=getnewpassword" method="POST">
-            <input type="text" name="newPassord">
-            <input type="hidden" name="uuid" value="${uuid}">
-            <input type="submit" value="Submit">
-        </form>
-        ${message}
-    </body>
+<%@ include file="/WEB-INF/includes/header_no_nav.jsp" %>
+
+<form id="form-resetpass" action="reset?action=getnewpassword" method="POST">
+    <div class="form-header">
+        <h1>New Password</h1>     
+    </div> 
+    <div class="form-group">
+        <h5>Please enter your new password to reset your password.</h5><br>
+        <input type="text" class="form-control" id="resetpass" name="newPassord" placeholder="new password">
+    </div>  
+    <div>
+        <p class="error">${message}</p>   
+    </div>            
+    <input class="login-button" type="hidden" name="uuid" value="${uuid}">
+    <input class="login-button" type="submit" value="Submit">
+</form>
+
+</body>
 </html>

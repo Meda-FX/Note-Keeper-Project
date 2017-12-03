@@ -15,14 +15,14 @@ import javax.naming.NamingException;
  * @author awarsyle
  */
 public class AccountService {
-    
+
     public User checkLogin(String username, String password, String path) {
         User user;
-        
+
         UserDB userDB = new UserDB();
         try {
             user = userDB.getUser(username);
-            
+
             if (user.getPassword().equals(password)) {
                 // successful login
                 Logger.getLogger(AccountService.class.getName())
@@ -30,13 +30,12 @@ public class AccountService {
                                 "A user logged in: {0}", username);
                 String email = user.getEmail();
                 try {
-                    
+
                     // WebMailService.sendMail(email, "NotesKeepr Login", "Big brother is watching you!  Hi " + user.getFirstname(), false);
-                    
                     HashMap<String, String> contents = new HashMap<>();
                     contents.put("firstname", user.getFirstname());
                     contents.put("date", ((new java.util.Date()).toString()));
-                    
+
                     try {
                         WebMailService.sendMail(email, "NotesKeepr Login", path + "/emailtemplates/login.html", contents);
                     } catch (IOException ex) {
@@ -47,46 +46,44 @@ public class AccountService {
                 } catch (NamingException ex) {
                     Logger.getLogger(AccountService.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
                 return user;
             }
-            
+
         } catch (NotesDBException ex) {
-        }        
+        }
         return null;
     }
-    
-    public User restPassword(String email, String path, String url)
-    {      
+
+    public User restPassword(String email, String path, String url) {
         User user = null;
         //UserDB userDB = new UserDB();
         UserService us = new UserService();
         String uuid = UUID.randomUUID().toString();
         String link = url + "?uuid=" + uuid;
-        
-        try 
-        {
+
+        try {
             user = us.getUserByEmail(email);
-            
+
             String firstname = user.getFirstname();
-            String lastname = user.getLastname(); 
+            String lastname = user.getLastname();
             String username = user.getUsername();
             user.setResetPasswordUUID(uuid);
-            
+
             try {
                 us.update(user);
             } catch (Exception ex) {
                 Logger.getLogger(AccountService.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             HashMap<String, String> contents;
-            
+
             contents = new HashMap<>();
             contents.put("link", link);
-            contents.put("firstname", firstname);   
+            contents.put("firstname", firstname);
             contents.put("lastname", lastname);
             contents.put("username", username);
-            
+
             try {
                 WebMailService.sendMail(email, "NotesKeepr Login", path + "/emailtemplates/resetpassword.html", contents);
             } catch (IOException ex) {
@@ -95,24 +92,23 @@ public class AccountService {
                 Logger.getLogger(AccountService.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NamingException ex) {
                 Logger.getLogger(AccountService.class.getName()).log(Level.SEVERE, null, ex);
-            } 
+            }
             return user;
-        } 
-        catch (NotesDBException ex) 
-        {
+        } catch (NotesDBException ex) {
             Logger.getLogger(AccountService.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {    
+        } catch (Exception ex) {
             Logger.getLogger(AccountService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    
-    public boolean changePassword(String uuid, String password) 
-    {
+
+    public boolean changePassword(String uuid, String password) {
         UserService us = new UserService();
         try {
             User user = us.getByUUID(uuid);
-            if(user==null) return false;
+            if (user == null) {
+                return false;
+            }
             user.setPassword(password);
             user.setResetPasswordUUID(null);
             //UserService us = new UserService();

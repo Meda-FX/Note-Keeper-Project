@@ -130,8 +130,24 @@ hr{
     background-color: #303138;;
 }
 
-/* nav bar style */
+/** register page**/
+#form-resetpass{
+    max-width: 500px;
+    padding: 15px;
+    margin: 0 auto;
+    background-color: #303138;;
+}
 
+#form-resetpass h5 {
+    color: #ffffff;
+    text-align: center;
+}
+
+#form-resetpass label {
+    color: #ffffff;
+}
+
+/* nav bar style */
 #note-nav {
      background: #00BF6B;
      color: #ffffff;
@@ -224,4 +240,34 @@ button {
 
 input:focus{
     outline: none;
+}
+
+/* email style */
+.emailheader {
+	background-color: #00BF6B;
+	text-align: center;
+	padding: 30px;
+	color: white;
+	font-size: 200px;
+}
+
+.emailsubt {
+	background-color: #303138;
+	color: white;
+	padding: .5px;
+	text-align: center;
+}
+
+.emailcontent{
+	text-align: center;
+	padding-top: 30px;
+}
+
+.emailcontent p{
+	font-size: 16px;
+}
+
+.emailcontent h5{
+	font-size: 20px;
+	font-weight: bold;
 }
