@@ -113,7 +113,7 @@
         </thead>
         <br>
         <c:forEach var="user" items="${users}">
-             <c:if test = "${user.company.companyID == copmID}">
+             <c:if test = "${user.company.companyID == compID}">
             <tr>
                 <td>${user.username}</td>
                 <td>${user.password}</td>

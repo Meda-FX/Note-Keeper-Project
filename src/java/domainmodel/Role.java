@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -40,7 +41,7 @@ public class Role implements Serializable {
     @Basic(optional = false)
     @Column(name = "RoleName")
     private String roleName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role", fetch = FetchType.EAGER)
     private Collection<User> userCollection;
 
     public Role() {

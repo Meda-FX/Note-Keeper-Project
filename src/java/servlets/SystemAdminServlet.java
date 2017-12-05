@@ -81,7 +81,6 @@ public class SystemAdminServlet extends HttpServlet {
             }
         }     
         
-
         UserService us = new UserService();
         try {
             if (action != null && action.equals("delete")) {

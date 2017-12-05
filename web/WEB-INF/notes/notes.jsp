@@ -30,6 +30,11 @@
                     <label for="dateCreated">Date Created:</label>
                     <input type="text" class="form-control" id="dateCreated" name="dateCreated" value="${selectedNote.dateCreated}" readonly>
                 </div>
+                <div class="form-group">
+                    <label for="active"> Make Note Public:   </label>
+                    <input type="radio" name="active" value="true" CHECKED> Public
+                    <input type="radio" name="active" value="false"> Private
+                </div>
                 <input id="table-buttons_se" type="hidden" name="action" value="edit">
                 <input id="table-buttons_se" type="submit" value="Save">
             </form> 
@@ -54,6 +59,11 @@
                     <label for="dateCreated">Date Created:</label>
                     <input type="text" class="form-control" id="dateCreated" name="dateCreated" readonly>
                 </div>
+                <div class="form-group">
+                    <label for="active"> Make Note Public: </label>
+                    <input type="radio" name="public" value="false" CHECKED> Private
+                    <input type="radio" name="public" value="true"> Public
+                </div>
                 <input id="table-buttons_se" type="hidden" name="action" value="add">
                 <input id="table-buttons_se" type="submit" value="Save">
             </form>       
@@ -65,8 +75,10 @@
     <br>
     <p class="error">${message}</p>   
     <table class="table">
+        <h5>Private Notes:</h5>
         <thead class="thead-dark">
             <tr>
+                <th>Note ID</th>
                 <th>Note Title</th>
                 <th>Contents</th>
                 <th>Date Created</th>
@@ -74,12 +86,15 @@
                 <th></th>
             </tr>
         </thead>
-        <c:forEach var="note" items="${notes}">
+        <c:forEach var="note" items="${notes}">            
             <c:if test = "${note.owner.username == user.username}">
                 <tr>
+                    <td>${note.noteID}</td>
                     <td>${note.title}</td>                
                     <td>${note.contents}</td>
                     <td>${note.dateCreated}</td>
+                    <td>${user.company}</td>
+                    <td>${compID}</td>
                     <td>
                         <form action="notes" method="post" >
                             <input id="table-buttons" type="submit" value="Delete">
@@ -99,6 +114,33 @@
             </c:if>
         </c:forEach>
     </table>
+    <hr>
+     <table class="table">
+         <h5>Public Notes:</h5>
+        <thead class="thead-dark">
+            <tr>
+                <th>Note ID</th>
+                <th>Note Title</th>
+                <th>Contents</th>
+                <th>Date Created</th>
+                <th>Owner</th>
+                <th>Company Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <c:forEach var="note" items="${notes}">            
+            <c:if test = "${user.company.companyID == note.owner.company.companyID && note.publicNote == true}">   
+                <tr>
+                    <td>${note.noteID}</td>  
+                    <td>${note.title}</td>                
+                    <td>${note.contents}</td>
+                    <td>${note.dateCreated}</td>
+                    <td>${note.owner.username}</td>
+                    <td>${note.owner.company.companyID}</td>
+                </tr>
+            </c:if>                
+        </c:forEach>
+    </table>    
 </div>
 <br><br>
 <%@ include file="/WEB-INF/includes/footer.jsp" %>

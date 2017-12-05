@@ -1,7 +1,6 @@
 
 package businesslogic;
 
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import dataaccess.UserDB;
 import domainmodel.Company;
 import domainmodel.Role;

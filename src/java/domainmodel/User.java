@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -61,13 +62,13 @@ public class User implements Serializable {
     private String lastname;
     @Column(name = "ResetPasswordUUID")
     private String resetPasswordUUID;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner", fetch = FetchType.EAGER)
     private Collection<Note> noteCollection;
     @JoinColumn(name = "Company", referencedColumnName = "CompanyID")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Company company;
     @JoinColumn(name = "Role", referencedColumnName = "RoleID")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Role role;
 
     public User() {
@@ -86,14 +87,14 @@ public class User implements Serializable {
         this.lastname = lastname;
     }
     
-    public User(String username, String password, String email, String firstname, String lastname) {
+     public User(String username, String password, String email, String firstname, String lastname) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
     }
-
+     
     public String getUsername() {
         return username;
     }

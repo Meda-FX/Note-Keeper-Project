@@ -37,6 +37,7 @@ CREATE TABLE `note` (
   `Title` varchar(30) NOT NULL,
   `Contents` varchar(20000) CHARACTER SET utf8 NOT NULL,
   `Owner` varchar(10) NOT NULL,
+  `PublicNote` BIT NOT NULL,
   PRIMARY KEY (`NoteID`),
   KEY `FK_Note_User` (`Owner`),
   CONSTRAINT `FK_Note_User` FOREIGN KEY (`Owner`) REFERENCES `user` (`Username`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -63,6 +64,6 @@ INSERT INTO `user` VALUES ('user4', 'password', 'cprg352+user3@gmail.com', 1, 'T
 INSERT INTO `user` VALUES ('user5', 'password', 'cprg352+user4@gmail.com', 1, 'Pinkie', 'Pie', null, 2, 3);
 INSERT INTO `user` VALUES ('user6', 'password', 'cprg352+user5@gmail.com', 0, 'Rainbow', 'Dash', null, 2, 3);
 
-INSERT INTO `note` (`DateCreated`, `Title`, `Contents`, `Owner`) VALUES (NOW(), 'Captains Log Stardate 41153.7', 'Our destination is planet Deneb IV beyond which lies the great, unexplored mass of the galaxy.', 'comp1');
-INSERT INTO `note` (`DateCreated`, `Title`, `Contents`, `Owner`) VALUES (NOW(), 'Personal Log, Stardate 41153.7', 'The USS Hood has dropped me off at Farpoint Station.', 'user1');
-INSERT INTO `note` (`DateCreated`, `Title`, `Contents`, `Owner`) VALUES (NOW(), 'My motivational quote', 'If I can\'t find a friendship problem, I\'ll make a friendship problem!', 'user4');
+INSERT INTO `note` (`DateCreated`, `Title`, `Contents`, `Owner`, `PublicNote`) VALUES (NOW(), 'Captains Log Stardate 41153.7', 'Our destination is planet Deneb IV beyond which lies the great, unexplored mass of the galaxy.', 'comp1', false);
+INSERT INTO `note` (`DateCreated`, `Title`, `Contents`, `Owner`, `PublicNote`) VALUES (NOW(), 'Personal Log, Stardate 41153.7', 'The USS Hood has dropped me off at Farpoint Station.', 'user1', false);
+INSERT INTO `note` (`DateCreated`, `Title`, `Contents`, `Owner`, `PublicNote`) VALUES (NOW(), 'My motivational quote', 'If I can\'t find a friendship problem, I\'ll make a friendship problem!', 'user4', false);

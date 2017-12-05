@@ -23,10 +23,11 @@ public class NoteService {
         return noteDB.getAll();
     }
     
-    public int update(int noteId, String contents, String title) throws Exception {
+    public int update(int noteId, String contents, String title, boolean noteSahre) throws Exception {
         Note note = noteDB.getNote(noteId);
         note.setTitle(title);
         note.setContents(contents);
+        note.setPublicNote(noteSahre);
         return noteDB.update(note);
     }
     
@@ -36,10 +37,10 @@ public class NoteService {
     }
     
     //user will edit the title and the content or only the content
-    public int insert(String title, String contents, User owner) throws Exception {
+    public int insert(String title, String contents, boolean publicNote, User owner) throws Exception {
         java.util.Date uDate = new java.util.Date();
         java.sql.Date sDate = new java.sql.Date(uDate.getTime());
-        Note note = new Note(0, sDate, title, contents, owner);
+        Note note = new Note(0, sDate, title, contents, publicNote, owner);
         return noteDB.insert(note);
     }
 }

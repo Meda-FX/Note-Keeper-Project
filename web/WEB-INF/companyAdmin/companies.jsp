@@ -41,8 +41,7 @@
     </c:if>
          </div>
     </div> <!-- row finishes here -->
-    <br>
-    
+    <br>    
     </div> <!-- End of Container one -->
     
     <div class="container-fluid "><!-- Begin of container two -->

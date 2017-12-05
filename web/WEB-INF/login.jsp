@@ -1,4 +1,4 @@
-<%@ include file="includes/header.jsp" %>
+<%@ include file="includes/header_no_nav.jsp" %>
 
 <form id="form-login" action="login?action=login" method="post">
     <div class="form-header">
