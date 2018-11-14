@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 
 public class RoleManagerServlet extends HttpServlet {
 
-   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -34,22 +33,22 @@ public class RoleManagerServlet extends HttpServlet {
                 Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         RoleService rs = new RoleService();
-        List<Role> roles = null;        
+        List<Role> roles = null;
         try {
             roles = rs.getAll();
         } catch (Exception ex) {
             Logger.getLogger(RoleManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         List<User> users = null;
         try {
             users = us.getAll();
         } catch (Exception ex) {
             Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         request.setAttribute("roles", roles);
         request.setAttribute("users", users);
         getServletContext().getRequestDispatcher("/WEB-INF/systemAdmin/rolemanager.jsp").forward(request, response);
@@ -60,28 +59,28 @@ public class RoleManagerServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String action = request.getParameter("action");
-        RoleService rs = new RoleService();        
-        String username = request.getParameter("username");       
+        RoleService rs = new RoleService();
+        String username = request.getParameter("username");
         String selectedRole = request.getParameter("userRoles");
         int roleid = Integer.parseInt(selectedRole);
-        
+
         UserService us = new UserService();
         try {
-                if (action != null && action.equals("edit")) {                    
+            if (action != null && action.equals("edit")) {
                 us.update(username, roleid);
                 doGet(request, response);
-            }            
+            }
         } catch (Exception ex) {
             request.setAttribute("message", "Could not perform that action.");
-        }        
-        
-        List<Role> roles = null;        
+        }
+
+        List<Role> roles = null;
         try {
             roles = rs.getAll();
         } catch (Exception ex) {
             Logger.getLogger(RoleManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         List<User> users = null;
         try {
             users = (List<User>) us.getAll();

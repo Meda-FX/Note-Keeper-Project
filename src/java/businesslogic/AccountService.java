@@ -18,20 +18,17 @@ public class AccountService {
 
     public User checkLogin(String username, String password, String path) {
         User user;
-
         UserDB userDB = new UserDB();
         try {
             user = userDB.getUser(username);
 
             if (user.getPassword().equals(password)) {
-                // successful login
+
                 Logger.getLogger(AccountService.class.getName())
                         .log(Level.INFO,
                                 "A user logged in: {0}", username);
                 String email = user.getEmail();
                 try {
-
-                    // WebMailService.sendMail(email, "NotesKeepr Login", "Big brother is watching you!  Hi " + user.getFirstname(), false);
                     HashMap<String, String> contents = new HashMap<>();
                     contents.put("firstname", user.getFirstname());
                     contents.put("date", ((new java.util.Date()).toString()));
@@ -46,10 +43,8 @@ public class AccountService {
                 } catch (NamingException ex) {
                     Logger.getLogger(AccountService.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
                 return user;
             }
-
         } catch (NotesDBException ex) {
         }
         return null;
@@ -57,7 +52,6 @@ public class AccountService {
 
     public User restPassword(String email, String path, String url) {
         User user = null;
-        //UserDB userDB = new UserDB();
         UserService us = new UserService();
         String uuid = UUID.randomUUID().toString();
         String link = url + "?uuid=" + uuid;
@@ -111,7 +105,6 @@ public class AccountService {
             }
             user.setPassword(password);
             user.setResetPasswordUUID(null);
-            //UserService us = new UserService();
             us.update(user);
             return true;
         } catch (Exception ex) {

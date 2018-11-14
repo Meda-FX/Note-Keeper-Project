@@ -53,15 +53,15 @@ public class NotesServlet extends HttpServlet {
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
         String accountHolder = (String) session.getAttribute("username");
-        
+
         String publicNote = request.getParameter("public");
         boolean noteSahre = true;
-        if(publicNote != null && publicNote.equals("true")) {
+        if (publicNote != null && publicNote.equals("true")) {
             noteSahre = true;
-        } else if (publicNote != null && publicNote.equals("false")){
+        } else if (publicNote != null && publicNote.equals("false")) {
             noteSahre = false;
         }
-        
+
         Note note = null;
         NoteService ns = new NoteService();
         try {
@@ -72,14 +72,12 @@ public class NotesServlet extends HttpServlet {
                     request.setAttribute("message", "Sorry. You can only delete your note.");
                     doGet(request, response);
                     return;
-                } 
-                else {
-                        if(note.getNoteID() == selectedId)
-                        {
-                            ns.delete(selectedId);
-                            request.setAttribute("message", "Note deleted successfully.");
-                            doGet(request, response);
-                        }
+                } else {
+                    if (note.getNoteID() == selectedId) {
+                        ns.delete(selectedId);
+                        request.setAttribute("message", "Note deleted successfully.");
+                        doGet(request, response);
+                    }
                 }
             } else if (action != null && action.equals("edit")) {
                 int noteId = Integer.parseInt(request.getParameter("noteid"));
@@ -98,7 +96,6 @@ public class NotesServlet extends HttpServlet {
                 User user;
                 user = (User) session.getAttribute("user");
                 ns.insert(title, contents, noteSahre, user);
-                //ns.insert(title, contents, user);
             }
         } catch (Exception ex) {
             request.setAttribute("message", "Could not perform that action. Please try again.");
@@ -111,7 +108,7 @@ public class NotesServlet extends HttpServlet {
             Logger.getLogger(NotesServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         int compId = (int) session.getAttribute("compID");
-        
+
         request.setAttribute("compaID", compId);
         request.setAttribute("notes", notes);
         getServletContext().getRequestDispatcher("/WEB-INF/notes/notes.jsp").forward(request, response);

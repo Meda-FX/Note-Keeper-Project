@@ -133,11 +133,11 @@
     <env-entry>
         <env-entry-name>webmail-username</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>test@mail.com</env-entry-value>
+        <env-entry-value>wediteklen@gmail.com</env-entry-value>
     </env-entry>
     <env-entry>
         <env-entry-name>webmail-password</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>1234</env-entry-value>
+        <env-entry-value>G*Z6+^;9CF+t</env-entry-value>
     </env-entry>
 </web-app>

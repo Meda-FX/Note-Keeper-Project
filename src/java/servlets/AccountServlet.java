@@ -36,7 +36,7 @@ public class AccountServlet extends HttpServlet {
 
         User user = null;
         String accountHolder;
-        
+
         accountHolder = (String) session.getAttribute("username");
 
         try {

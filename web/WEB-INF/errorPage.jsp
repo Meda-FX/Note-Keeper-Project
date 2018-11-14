@@ -16,15 +16,15 @@
         <!-- Bootstrap Styles ends here -->
     </head>
     <body>
-    <div class="site-wrapper">          
-            <h1 class="cover-heading">WOOPS!</h1>
+        <div class="site-wrapper">          
+            <h1 class="cover-heading">WHOOPS!</h1>
             <p class="lead">The page you were looking for doesn't exist.</p>
             <p class="lead">You may have mistyped the address or the page may have moved.</p>
             <p class="lead">
-              <a id="table-buttons_se" href="login" class="btn btn-lg btn-secondary">GO HOME</a>
+                <a id="table-buttons_se" href="login" class="btn btn-lg btn-secondary">GO HOME</a>
             </p>
-    </div>
-  </body>
+        </div>
+    </body>
 </html>
 
 

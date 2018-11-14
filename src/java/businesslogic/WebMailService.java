@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package businesslogic;
 
 import java.io.BufferedReader;
@@ -24,31 +19,31 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 public class WebMailService {
+
     public static void sendMail(String to, String subject, String template, HashMap<String, String> contents) throws FileNotFoundException, IOException, MessagingException, NamingException {
         BufferedReader br = new BufferedReader(new FileReader(new File(template)));
-        
+
         StringBuilder body = new StringBuilder();
         String line = br.readLine();
-        while(line != null) {
+        while (line != null) {
             body.append(line);
             line = br.readLine();
         }
-        
+
         String bodyString = body.toString();
-        
-        for(String key : contents.keySet()) {
+
+        for (String key : contents.keySet()) {
             bodyString = bodyString.replace("{{" + key + "}}", contents.get(key));
         }
-        
+
         sendMail(to, subject, bodyString, true);
     }
-    
-    
+
     public static void sendMail(String to, String subject, String body, boolean bodyIsHTML) throws MessagingException, NamingException {
-        Context env = (Context)new InitialContext().lookup("java:comp/env");
-        String username = (String)env.lookup("webmail-username");
-        String password = (String)env.lookup("webmail-password");
-        
+        Context env = (Context) new InitialContext().lookup("java:comp/env");
+        String username = (String) env.lookup("webmail-username");
+        String password = (String) env.lookup("webmail-password");
+
         Properties props = new Properties();
         props.put("mail.transport.protocol", "smtps");
         props.put("mail.smtps.host", "smtp.gmail.com");
@@ -57,7 +52,7 @@ public class WebMailService {
         props.put("mai.smtps.quitwait", "false");
         Session session = Session.getDefaultInstance(props);
         session.setDebug(true);
-        
+
         // create a message
         Message message = new MimeMessage(session);
         message.setSubject(subject);
@@ -66,13 +61,13 @@ public class WebMailService {
         } else {
             message.setText(body);
         }
-        
+
         // address the message
         Address fromAddress = new InternetAddress("cprg352@gmail.com");
         Address toAddress = new InternetAddress(to);
         message.setFrom(fromAddress);
         message.setRecipient(Message.RecipientType.TO, toAddress);
-        
+
         // send the message
         Transport transport = session.getTransport();
         transport.connect(username, password);

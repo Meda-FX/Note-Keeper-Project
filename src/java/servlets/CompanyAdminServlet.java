@@ -25,17 +25,13 @@ public class CompanyAdminServlet extends HttpServlet {
         UserService us = new UserService();
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
-        
-        //// causing issue
+
         int compId = 0;
-        if(session != null)
-        {
+        if (session != null) {
             compId = (int) session.getAttribute("compID");
             request.setAttribute("copmID", compId);
         }
-        //(int) session.getAttribute("compID");
-        
-        
+
         if (action != null && action.equals("view")) {
             String selectedUser = request.getParameter("selectedUser");
             try {
@@ -45,7 +41,7 @@ public class CompanyAdminServlet extends HttpServlet {
                 Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         List<User> users = null;
         try {
             users = us.getAll();
@@ -75,40 +71,29 @@ public class CompanyAdminServlet extends HttpServlet {
         String lastname = request.getParameter("lastname");
         String status = request.getParameter("active");
         boolean activation = true;
-        
-        if(status != null) {
-            if(status.equals("true")) {
+
+        if (status != null) {
+            if (status.equals("true")) {
                 activation = true;
-            }
-            else if (status.equals("false")){
+            } else if (status.equals("false")) {
                 activation = false;
             }
-        }     
-        
-//        if(status != null && status.equals("true"))
-//        {
-//            activation = true;
-//        }
-//        else
-//        {
-//            activation = false;
-//        }
+        }
 
         UserService us = new UserService();
-        //CompanyService cs = new CompanyService();
         try {
             if (action != null && action.equals("delete")) {
                 user = us.get(selectedUser);
                 if (user.getUsername().equals(accountHolder)) {
                     request.setAttribute("message", "You cannot delete yourself.");
                     doGet(request, response);
-                } else {                    
+                } else {
                     us.delete(selectedUser);
                     request.setAttribute("message", "Deleted Successfuly.");
                     doGet(request, response);
                 }
             } else if (action != null && action.equals("edit")) {
-                
+
                 us.update(username, email, password, firstname, lastname, activation);
                 doGet(request, response);
 
@@ -119,7 +104,7 @@ public class CompanyAdminServlet extends HttpServlet {
                     doGet(request, response);
                     return;
                 }
-                
+
                 us.insert(username, password, email, activation, firstname, lastname, compId);
                 doGet(request, response);
             }

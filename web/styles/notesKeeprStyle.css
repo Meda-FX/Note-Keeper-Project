@@ -5,22 +5,8 @@ body {
     padding-top: 60px;
 }
 
-.site-wrapper {
-    background-color: #333;
-     background-image: url("https://www.irishtimes.com/polopoly_fs/1.2453158.1449152864!/image/image.jpg");
-    height: 700px;
-    color: #ffffff;
-    padding-top: 200px;
-     
-
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
 .errprInner{
-   margin-top: 300%;
+    margin-top: 300%;
 }
 
 .site-wrapper h1 {
@@ -40,42 +26,36 @@ body {
     text-align: center;
 }
 
-#form-login{
-     max-width: 400px;
-    padding: 15px;
-    margin: 0 auto;
-    background-color: #303138;
+
+#form-login{    
+    background-color: #212529;
     color: #ffffff;
 }
 
-#form-login label {
-    color: #ffffff;
-}
 
 hr{
-     border: 0;
+    border: 0;
     height: 2px;
     background: #fff;
     background-image: linear-gradient(to right, #ccc, #333, #ccc);
 }
 
 .form-header {
-     padding: 50px;
-     color: #ffffff;    
+    padding: 50px;    
 }
 
 .form-header h1 {
-     font-size: 44px;
-     text-align: center;    
+    font-size: 44px;
+    text-align: center;    
 }
 .form-header h2 {
-     font-size: 40px;
-     text-align: center;
+    font-size: 40px;
+    text-align: center;
 }
 
 .form-header h3 {
-     font-size: 30px;
-     text-align: center;
+    font-size: 30px;
+    text-align: center;
 }
 
 #company-select {
@@ -98,29 +78,22 @@ hr{
     color: #ffffff;
     background: #007F47;
     width: 100%;
-     font-size: 18px;
+    font-size: 18px;
 }
 
-.form-signin {
-    max-width: 430px;
-    padding: 15px;
-    margin: 0 auto;
-    background-color: #ff0033;
-}
-#login-footer-link {
-    color: #00BF6B;
-    text-align: center;
-    text-decoration: none;
- 
-}
-#login-footer-link:hover{
-    color: #ffffff;    
+#form-login a {
+       color: #ffffff;
 }
 
-#regis-reset_login {
-   padding-left: 40px;
-   padding-right: 40px; 
+#form-login a:hover {
+       color: #ffffff;
 }
+
+
+/*#regis-reset_login {
+    padding-left: 40px;
+    padding-right: 40px; 
+}*/
 
 /** register page**/
 #form-register{
@@ -149,8 +122,8 @@ hr{
 
 /* nav bar style */
 #note-nav {
-     background: #00BF6B;
-     color: #ffffff;
+    background: #00BF6B;
+    color: #ffffff;
 }
 #note-nav a:hover{
     color: #303138;
@@ -171,12 +144,11 @@ hr{
 button a {
     color: #ffffff;
     text-decoration: none;
-    
 }
 button a:hover {
     color: #303138;
     text-decoration: none;
-    
+
 }
 button {
     background: #00BF6B;
@@ -244,30 +216,77 @@ input:focus{
 
 /* email style */
 .emailheader {
-	background-color: #00BF6B;
-	text-align: center;
-	padding: 30px;
-	color: white;
-	font-size: 200px;
+    background-color: #00BF6B;
+    text-align: center;
+    padding: 30px;
+    color: white;
+    font-size: 200px;
 }
 
 .emailsubt {
-	background-color: #303138;
-	color: white;
-	padding: .5px;
-	text-align: center;
+    background-color: #303138;
+    color: white;
+    padding: .5px;
+    text-align: center;
 }
 
 .emailcontent{
-	text-align: center;
-	padding-top: 30px;
+    text-align: center;
+    padding-top: 30px;
 }
 
 .emailcontent p{
-	font-size: 16px;
+    font-size: 16px;
 }
 
 .emailcontent h5{
-	font-size: 20px;
-	font-weight: bold;
+    font-size: 20px;
+    font-weight: bold;
 }
+
+
+/*
+
+@media (min-width: 992px) { 
+
+#form-login{
+    max-width: 450px;
+    padding: 15px;
+    margin: 0 auto;
+    background-color: #303138;
+    color: #ffffff;
+
+}
+
+}
+
+@media (max-width: 991px) { 
+
+#form-login{
+    width: 100%;
+    padding: 15px;
+    margin: 0 auto;
+    background-color: #303138;
+    color: #ffffff;
+    height: 100%;
+}
+
+}*/
+
+/*  To Be deleted */
+/*
+.site-wrapper {
+    background-color: #333;
+    background-image: url("https://www.irishtimes.com/polopoly_fs/1.2453158.1449152864!/image/image.jpg");
+    height: 700px;
+    color: #ffffff;
+    padding-top: 200px;
+
+
+    /* Center and scale the image nicely */
+    /*background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+*/

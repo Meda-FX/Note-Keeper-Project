@@ -93,8 +93,6 @@
                     <td>${note.title}</td>                
                     <td>${note.contents}</td>
                     <td>${note.dateCreated}</td>
-                    <td>${user.company}</td>
-                    <td>${compID}</td>
                     <td>
                         <form action="notes" method="post" >
                             <input id="table-buttons" type="submit" value="Delete">
@@ -115,8 +113,8 @@
         </c:forEach>
     </table>
     <hr>
-     <table class="table">
-         <h5>Public Notes:</h5>
+    <table class="table">
+        <h5>Public Notes:</h5>
         <thead class="thead-dark">
             <tr>
                 <th>Note ID</th>
@@ -124,7 +122,7 @@
                 <th>Contents</th>
                 <th>Date Created</th>
                 <th>Owner</th>
-                <th>Company Name</th>
+                <th></th>
                 <th></th>
             </tr>
         </thead>
@@ -136,7 +134,6 @@
                     <td>${note.contents}</td>
                     <td>${note.dateCreated}</td>
                     <td>${note.owner.username}</td>
-                    <td>${note.owner.company.companyID}</td>
                 </tr>
             </c:if>                
         </c:forEach>

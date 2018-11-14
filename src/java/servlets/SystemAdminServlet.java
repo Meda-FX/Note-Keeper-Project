@@ -33,7 +33,7 @@ public class SystemAdminServlet extends HttpServlet {
                 Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         List<User> users = null;
         try {
             users = us.getAll();
@@ -55,14 +55,14 @@ public class SystemAdminServlet extends HttpServlet {
         String accountHolder = (String) session.getAttribute("username");
         String selectedUser = request.getParameter("selectedUser");
         int compId = (int) session.getAttribute("compID");
-        
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
         String status = request.getParameter("active");
-        boolean activation = true;        
+        boolean activation = true;
 //        if(status != null && status.equals("true"))
 //        {
 //            activation = true;
@@ -71,16 +71,15 @@ public class SystemAdminServlet extends HttpServlet {
 //        {
 //            activation = false;
 //        }
-        
-        if(status != null) {
-            if(status.equals("true")) {
+
+        if (status != null) {
+            if (status.equals("true")) {
                 activation = true;
-            }
-            else if (status.equals("false")){
+            } else if (status.equals("false")) {
                 activation = false;
             }
-        }     
-        
+        }
+
         UserService us = new UserService();
         try {
             if (action != null && action.equals("delete")) {
@@ -88,7 +87,7 @@ public class SystemAdminServlet extends HttpServlet {
                 if (user.getUsername().equals(accountHolder)) {
                     request.setAttribute("message", "You cannot delete yourself.");
                     doGet(request, response);
-                } else {                    
+                } else {
                     request.setAttribute("message", "Deleted Successfuly.");
                     us.delete(selectedUser);
                     doGet(request, response);
@@ -106,7 +105,7 @@ public class SystemAdminServlet extends HttpServlet {
                 }
                 us.insert(username, password, email, activation, firstname, lastname, compId);
                 doGet(request, response);
-            }            
+            }
         } catch (Exception ex) {
             request.setAttribute("message", "Could not perform that action.");
         }

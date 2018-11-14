@@ -26,16 +26,14 @@ public class LoginServlet extends HttpServlet {
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
-        
+
         if (action != null && action.equals("logout")) {
             session.removeAttribute(username);
             session.invalidate();
             request.setAttribute("message", "You've been logged out successfully.");
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
             return;
-        }
-        else if(action != null && action.equals("register"))
-        {
+        } else if (action != null && action.equals("register")) {
             getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
         }
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
@@ -56,8 +54,8 @@ public class LoginServlet extends HttpServlet {
         Company company = null;
         UserService us = new UserService();
         RoleService rs = new RoleService();
-        CompanyService cs = new CompanyService();        
-        
+        CompanyService cs = new CompanyService();
+
         if (action == null) {
             action = "";
         }
@@ -75,40 +73,37 @@ public class LoginServlet extends HttpServlet {
             }
 
             try {
-                user = us.get(username);               
+                user = us.get(username);
                 if (user == null) //case 1 username exist
                 {
                     request.setAttribute("message", "User name does not exist.");
                     getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                     return;
                 }
-                //case 2 username does not exists                
+
                 if (user.getPassword().equals(password)) {
-                    userComp = us.get(username);                        
+                    userComp = us.get(username);
                     int compID = userComp.getCompany().getCompanyID();
-                    
+
                     if (user.getActive() == true) {
                         role = rs.get(1);
-                        if (user.getRole().getRoleID() == 1) 
-                        {      
+                        if (user.getRole().getRoleID() == 1) {
                             session.setAttribute("username", username);
                             session.setAttribute("user", user);
                             session.setAttribute("compID", compID);
                             response.sendRedirect("admin");
-                        } else if (user.getRole().getRoleID() == 2)
-                        {
+                        } else if (user.getRole().getRoleID() == 2) {
                             session.setAttribute("username", username);
                             session.setAttribute("user", user);
                             session.setAttribute("compID", compID);
                             response.sendRedirect("notes");
-                        } else
-                        {                            
+                        } else {
                             session.setAttribute("username", username);
-                            session.setAttribute("user", user);    
+                            session.setAttribute("user", user);
                             session.setAttribute("compID", compID);
                             response.sendRedirect("companyadmin");
                         }
-                      
+
                     } else {
                         request.setAttribute("message", "The user is not active.");
                         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
@@ -123,7 +118,5 @@ public class LoginServlet extends HttpServlet {
                 Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-       
     }
-
 }
